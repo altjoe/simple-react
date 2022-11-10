@@ -1,10 +1,10 @@
 import React from 'react';
-import CompTest from './comp-test';
+import Table from './table'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Tables/CompTest',
-  component: CompTest,
+  title: 'Table',
+  component: Table,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     class: { control: 'text' },
@@ -12,7 +12,7 @@ export default {
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = (args) => <CompTest {...args} />;
+const Template = (args) => <Table {...args} />;
 
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args

@@ -1,1 +1,1 @@
-export { default as CompTest } from './CompTest'
+export { default as Table } from './Table'
