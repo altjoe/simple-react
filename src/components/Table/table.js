@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types'
 import TextArea from 'react-expanding-textarea'
 
-export default function Table(props) {
+export default function Table(props) 
 
     const displayTable = () => {
         if (props.data) {

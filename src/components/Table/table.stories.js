@@ -39,7 +39,7 @@ sidewaysTable.args = {
   headerClass : '',
   bodyClass : 'flex flex-1',
   rowClass : 'flex flex-col flex-1',
-  cellClass : 'flex-1 text-center focus:bg-slate-200 hover:bg-slate-200 border-b',
+  cellClass : 'flex-1 text-center focus:bg-slate-200 hover:bg-slate-200 border-b focus:outline',
   headerCellClass : 'border-b bg-purple-200',
   data : {
     0: {'row1' : '1', 'row2' : 2}
