@@ -48,6 +48,7 @@
     "registry": "https://npm.pkg.github.com/altjoe"
   },
   "dependencies": {
-    "@storybook/addon-postcss": "^2.0.0"
+    "@storybook/addon-postcss": "^2.0.0",
+    "react-expanding-textarea": "^2.3.6"
   }
 }
