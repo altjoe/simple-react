@@ -4,7 +4,8 @@ import TextArea from 'react-expanding-textarea'
 
 export default function Table(props) {
     
-    const verticalTable = (rows, columns) => {
+    const verticalTable = (rows) => {
+        const columns = Object.keys(props.data[0])
         if (props.flex.length !== columns.length) {
             throw 'For vertical table flex array needs same length as number of columns'
         }
@@ -30,39 +31,34 @@ export default function Table(props) {
     }
 
     const horizontalTable = (rows, columns) => {
-        if (!props.vertical) {
-            
-        }
-
-        return (
-            <div className={`${props.wrapperClass}`}>
-                <div className={`${props.headerClass}`}>
-                    {columns.map(col => <div className={`${props.headerCellClass}`}>{col}</div>)}
-                </div>
+        if (typeof props.data !== 'undefined') {
+            return (
                 <div className={`${props.bodyClass}`}>
-                    {rows.map(row => {
+                    {Object.keys(props.data).map(key => {
                         return (
                             <div className={`${props.rowClass}`}>
-                                {columns.map(col => <TextArea className={`${props.inputCellClass}`}
-                                                            value={props.data[row][col]} />)}
+                                <div className={`${props.headerCellClass}`}
+                                    style={{'flex' : props.flex[0]}}>{key}</div>
+                                {props.data[key].map((val, i) => {
+                                    return <div className={`${props.inputCellClass}`}
+                                                style={{'flex' : props.flex[i + 1]}}>{val}</div>
+                                })}
                             </div>
                         )
                     })}
                 </div>
-            </div>
-        )
+            )
+        }
     }
 
     const displayTable = () => {
         if (typeof props.data !== 'undefined') {
             const rows = Object.keys(props.data)
             if (rows.length > 0) {
-                const columns = Object.keys(props.data[0])
-
                 if (props.vertical) {
-                    return verticalTable(rows, columns)
+                    return verticalTable(rows)
                 } else {
-                    return horizontalTable(rows, columns)
+                    return horizontalTable(rows)
                 }
             }
         }

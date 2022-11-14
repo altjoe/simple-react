@@ -39,17 +39,13 @@ export const horizontalTable = Template.bind({});
 horizontalTable.args = {
   vertical : false,
   wrapperClass : 'flex',
-  headerClass : 'bg-red-200',
-  bodyClass : 'flex',
-  rowClass : '',
-  headerCellClass : 'flex-1 text-center',
-  inputCellClass : 'flex-1 text-center resize-none outline-none',
+  bodyClass : ' text-center',
+  rowClass : 'flex w-full ',
+  headerCellClass : 'bg-red-200',
+  inputCellClass : 'border-b',
   data : {
-    0: {'col1' : '1', 'col2' : '2', 'col3' : '3'},
-    1: {'col1' : '2', 'col2' : '3', 'col3' : '4'},
-    2: {'col1' : '3', 'col2' : '4', 'col3' : '5'},
-    3: {'col1' : '4', 'col2' : '5', 'col3' : '6'},
-    4: {'col1' : '5', 'col2' : '6', 'col3' : '7'}
+    'row1' : [0, 1, 2],
+    'row2' : [1, 2, 3]
   },
-  flex : [1, 1, 1, 1, 1]
+  flex : [1, 1, 1, 1]
 };
