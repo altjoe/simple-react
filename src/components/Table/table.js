@@ -2,46 +2,78 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types'
 import TextArea from 'react-expanding-textarea'
 
-export default function Table(props) 
+export default function Table(props) {
+    
+    const verticalTable = (rows) => {
+        const columns = Object.keys(props.data[0])
+        if (props.flex.length !== columns.length) {
+            throw 'For vertical table flex array needs same length as number of columns'
+        }
+        return (
+            <div className={`${props.wrapperClass}`}>
+                <div className={`flex ${props.headerClass}`}>
+                    {columns.map((col, i) => <div className={`${props.headerCellClass}`}
+                                            style={{'flex' : props.flex[i]}}>{col}</div>)}
+                </div>
+                <div className={`${props.bodyClass}`}>
+                    {rows.map(row => {
+                        return (
+                            <div className={`flex ${props.rowClass}`}>
+                                {columns.map((col, i) => <TextArea className={`${props.inputCellClass}`}
+                                                            style={{'flex' : props.flex[i]}}
+                                                            value={props.data[row][col]} />)}
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+        )
+    }
 
-    const displayTable = () => {
-        if (props.data) {
-            console.log(typeof props.flex);
-            const rowindex = Object.keys(props.data)
-            if (rowindex.length > 0) {
-                const columns = Object.keys(props.data[0])
-                return (
-                    <div className={`${props.wrapperClass}`}>
-                        <div className={`${props.headerClass} ${props.rowClass}`}>
-                            {columns.map((col, i) => <div className={`${props.headerCellClass}`} 
-                                                        style={{'flex' : typeof props.flex === 'undefined' ? '' : props.flex[i]}}>{col}</div>)}
-                        </div>
-                        <div className={`${props.bodyClass}`}>
-                            {rowindex.map(i => {
-                                return (
-                                    <div className={`${props.rowClass}`}>
-                                        {columns.map(col => <TextArea className={`${props.cellClass} resize-none outline-none`} 
-                                                                rows={1}
-                                                                value={props.data[i][col]}
-                                                                style={{'flex' : typeof props.flex === 'undefined' ? '' : props.flex[i]}}/>)}
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </div>
-                )
-            } 
+    const horizontalTable = (rows, columns) => {
+        if (typeof props.data !== 'undefined') {
+            return (
+                <div className={`${props.bodyClass}`}>
+                    {Object.keys(props.data).map(key => {
+                        return (
+                            <div className={`${props.rowClass}`}>
+                                <div className={`${props.headerCellClass}`}
+                                    style={{'flex' : props.flex[0]}}>{key}</div>
+                                {props.data[key].map((val, i) => {
+                                    return <div className={`${props.inputCellClass}`}
+                                                style={{'flex' : props.flex[i + 1]}}>{val}</div>
+                                })}
+                            </div>
+                        )
+                    })}
+                </div>
+            )
         }
     }
 
-    return displayTable();
+    const displayTable = () => {
+        if (typeof props.data !== 'undefined') {
+            const rows = Object.keys(props.data)
+            if (rows.length > 0) {
+                if (props.vertical) {
+                    return verticalTable(rows)
+                } else {
+                    return horizontalTable(rows)
+                }
+            }
+        }
+    }
+
+    return displayTable()
 }
 Table.propTypes = {
+    'vertical' : PropTypes.bool.isRequired,
     'wrapperClass' : PropTypes.string,
     'headerClass' : PropTypes.string,
     'bodyClass' : PropTypes.string,
     'rowClass' : PropTypes.string,
-    'cellClass' : PropTypes.string,
-    'data' : PropTypes.object,
-    'flex' : PropTypes.array
+    'headerCellClass' : PropTypes.string,
+    'inputCellClass' : PropTypes.string,
+    'data' : PropTypes.object.isRequired,
+    'flex' : PropTypes.array,
 }
