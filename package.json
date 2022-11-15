@@ -49,6 +49,7 @@
   },
   "dependencies": {
     "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/jest": "^0.0.10",
     "react-expanding-textarea": "^2.3.6"
   }
 }

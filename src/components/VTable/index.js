@@ -1,1 +1,1 @@
-export {default} from './h-table'
+export {default} from './v-table'

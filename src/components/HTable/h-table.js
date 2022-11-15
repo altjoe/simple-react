@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types'
 
-export default function VTable(props) {
+export default function HTable(props) {
     
     const displayTable = () => {
         if (typeof props.data !== 'undefined'){
@@ -11,6 +11,6 @@ export default function VTable(props) {
     
     return displayTable()
 }
-VTable.propTypes = {
+HTable.propTypes = {
     'class' : PropTypes.string,
 }
