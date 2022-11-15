@@ -35,7 +35,7 @@ export default function VTable(props) {
                                     key={`row-${i}`}>
                                     {Object.keys(props.data).map((key, j) => {
                                         return (
-                                            <div className={`${props.inputContainer}`}
+                                            <div className={`flex ${props.inputContainer}`}
                                                 style={{'flex' : props.flex[j]}}
                                                 onClick={event => handleFocus(`Textarea-${key}-${i}`)}
                                                 key={`inputContainer-${key}-${i}`}>
