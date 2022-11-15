@@ -12,17 +12,16 @@ const Template = (args) => <HTable {...args} />;
 export const Primary = Template.bind({});
 
 Primary.args = {
-  wrapperClass : '',
-  rowClass : 'border-b',
-  headerClass : '',
-  bodyClass : '',
-  headerCellClass : 'text-center',
-  inputCellClass : 'resize-none text-center hover:bg-slate-200 rounded-2xl outline-none',
+  wrapperClass : 'w-1/2',
+  rowClass : 'group',
+  dataClass : 'border-b',
+  headerClass : 'p-2 text-center self-stretch bg-purple-200 group-first:rounded-t-lg group-last:rounded-b-lg',
+  headerCellClass : 'm-auto',
+  inputContainer : ' group hover:bg-slate-200 group-focus-within:bg-slate-200 hover:cursor-text rounded-lg',
+  inputCellClass : 'm-auto text-center outline-none resize-none bg-transparent ',
   data : {
-    'row1' : [1, 3, 3],
-    'row2' : [2, 3, 4],
-    'row3' : [3, 4, 5]
+    'Name:' : ['']
   },
-  'flex' : [1, 4, 1]
+  'flex' : [1, 2.5]
 };
 
