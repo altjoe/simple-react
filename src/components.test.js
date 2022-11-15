@@ -1,10 +1,16 @@
 
 import React from "react";
 import {render} from '@testing-library/react'
-import {Table} from './components'
+import {VTable, HTable} from './components'
 
 describe('Table - src default usability', () => {
     test('renders the Table component', () => {
-        render(<Table className={``} />)
+        render(<VTable className={``} />)
+    });
+});
+
+describe('Table - src default usability', () => {
+    test('renders the Table component', () => {
+        render(<HTable className={``} />)
     });
 });
