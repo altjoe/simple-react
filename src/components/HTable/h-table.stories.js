@@ -1,5 +1,6 @@
 import React from 'react';
 import HTable from './h-table';
+import { tw } from '../../utils';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -12,23 +13,27 @@ const Template = (args) => <HTable {...args} />;
 export const Primary = Template.bind({});
 
 Primary.args = {
-  wrapperClass : '',
-  rowClass : 'group',
-  dataClass : 'border-b',
-  headerClass : 'p-2 text-center self-stretch bg-purple-200\
-                 group-first:rounded-t-lg group-last:rounded-b-lg',
-  headerCellClass : 'm-auto',
-  inputContainer : ' hover:bg-slate-200 focus-within:bg-slate-200 rounded-2xl',
-  inputCellClass : 'm-auto text-center outline-none resize-none bg-transparent',
+  wrapperClass : 'text-center ',
+  rowClass : 'group flex-col md:flex-row landscape:flex-row',
+  dataContainer : tw('flex-col md:flex-row', 
+                     'group py-2 md:p-0'),
+  headerClass : tw('bg-green-200 p-2',
+                   'group-first:rounded-t-xl group-last:rounded-b-xl',
+                   'rounded-xl landscape:rounded-none'),
+  headerCellClass : 'self-center',
+  inputContainer : 'border-b',
+  inputCellClass : tw('resize-none outline-none text-center rounded-xl p-1',
+                      ''),
   data : {
-    'Full name': ['', ''],  
+    'Name': [''],
     'Email': ['']
   },
   placeholder : {
-    'Full name': ['First', 'Last'],
+    'Name': ['First Last'],
     'Email': ['test@gmail.com']
   },
-  'flex' : [1, 1, 1]
+  headerflex : [1, 2.5],
+  bodyflex : [1]
 };
 
 
@@ -41,16 +46,17 @@ NoParams.args = {
 export const NoStyle = Template.bind({});
 
 NoStyle.args = {
-  wrapperClass : ``,
-  rowClass : ``,
-  headerClass : ``,
-  dataClass : ``,
-  headerCellClass : ``,
-  inputContainer : ``,
-  inputCellClass : ``,
-  data : {'Full name': ['', '']},
-  placeholder : {'Full name': ['First', 'Last']},
-  flex : [1, 1, 1]
+  wrapperClass : '',
+  rowClass : '',
+  dataContainer : '',
+  headerClass : '',
+  headerCellClass : '',
+  inputContainer : '',
+  inputCellClass : '',
+  data : {'Full name': ['', '', '']},
+  placeholder : {'Full name': ['First', 'Middle', 'Last']},
+  headerflex : [1, 2.5],
+  bodyflex : [1, 1, 1]
 };
 
 export const NoFlex = Template.bind({});
