@@ -19,29 +19,35 @@ export default function HTable(props) {
     }
 
     const displayTable = () => {
+        let flex = ''
+        if (props.flexbox) {
+            flex = 'flex'
+        }
+        console.log(flex);
+
         if (props.data) {
             return (
                 <div className={`${props.wrapperClass}`}>
                     {Object.keys(props.data).map(key => {
                         return (
-                            <div className={`flex ${props.rowClass}`}>
-                                <div className={`flex ${props.headerClass}`}
+                            <div className={`${flex} ${props.rowClass}`}>
+                                <div className={`${flex} ${props.headerClass}`}
                                     style={{
-                                        'flex' : typeof props.headerflex[0] !== 'undefined' ? props.headerflex[0] : ''
+                                        'flex' : typeof props.headerflex !== 'undefined' ? props.headerflex[0] : ''
                                     }}>
-                                        <div className={`flex-1 ${props.headerCellClass}`}>{key}</div>
+                                        <div className={`${flex}-1 ${props.headerCellClass}`}>{key}</div>
                                 </div>
-                                <div className={`flex ${props.dataContainer}`}
+                                <div className={`${flex} ${props.dataContainer}`}
                                     style={{
-                                        'flex' : typeof props.headerflex[1] !== 'undefined' ? props.headerflex[1] : ''
+                                        'flex' : typeof props.headerflex !== 'undefined' ? props.headerflex[1] : ''
                                     }}>
                                     {props.data[key].map((val, i) => {
                                         return (
-                                            <div className={`flex ${props.inputContainer}`}
+                                            <div className={`${flex} ${props.inputContainer}`}
                                                 style={{
                                                     'flex' : typeof props.bodyflex !== 'undefined' ? props.bodyflex[i] : ''
                                                 }}>
-                                                <TextArea className={`flex-1 ${props.inputCellClass}`}
+                                                <TextArea className={`${flex}-1 ${props.inputCellClass}`}
                                                         placeholder={props.placeholder[key][i]}
                                                         value={val}/>
                                             </div>
@@ -54,7 +60,27 @@ export default function HTable(props) {
                 </div>
             )
         } else {
-            const dataExample = ''
+            const dataExample = "data={{'col1': [1, 2, 3], 'col2' : [2, 3, 4]}}"
+            const flexExample = "flex={[1, 1]}"
+
+            return (
+                <div>
+                    <h4 className={`font-bold`}>HTable Parameter 'data' is required. All params listed:</h4>
+                    <p>
+                        wrapperClass : ''<br />
+                        rowClass : ''<br />
+                        dataContainer : ''<br />
+                        headerClass : ''<br />
+                        headerCellClass : ''<br />
+                        inputContainer : ''<br />
+                        inputCellClass : ''<br />
+                        {`data : {'Full name': ['', '', '']}`}<strong>{` <- Required`}</strong><br /> 
+                        {`placeholder : {'Full name': ['First', 'Middle', 'Last']}`}<br />
+                        headerflex : [1, 2.5]<br />
+                        bodyflex : [1, 1, 1]
+                    </p>
+                </div>
+            )
         }
     }
     

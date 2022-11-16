@@ -6,7 +6,7 @@ import { expect } from '@storybook/jest';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Table/Vertical-Table',
+  title: 'Split-Table/Vertical-Table',
   component: VTable,
   argTypes : {
 
@@ -18,31 +18,26 @@ const Template = (args) => <VTable {...args} />;
 export const Primary = Template.bind({});
 
 Primary.args = {
-  wrapperClass : '',
-  rowClass : 'border-b',
-  headerClass : 'text-center bg-purple-200 rounded-2xl',
-  bodyClass : '',
+  wrapperClass : 'text-xs',
+  rowClass : ' border-b',
+  headerClass : 'text-center bg-blue-200 rounded-2xl',
   headerCellClass : 'm-auto',
-  inputContainer : 'flex group flex-1 border-gren-500 hover:bg-slate-200 hover:cursor-text focus-within:bg-slate-200 rounded-2xl',
+  bodyClass : '',
+  inputContainer : 'group border-gren-500 hover:bg-slate-200 hover:cursor-text focus-within:bg-slate-200 rounded-2xl',
   inputCellClass : 'p-1 resize-none bg-transparent text-center outline-none',
   data : {
     'col1' : [1, 2, 3], 
-    'col2' : [2, 3, 4],
+    'Description' : [2, 3, 4],
     'col3' : [3, 4, 5],
     'col4' : [4, 5, 6],
   },
-  flex : [1, 5, 1, 1]
+  flex : [1, 2, 1, 1],
+  flexbox : true
 };
 
-export const NoParams = Template.bind({});
+export const NoStyleFlexbox = Template.bind({});
 
-NoParams.args = {
-
-};
-
-export const NoStyle = Template.bind({});
-
-NoStyle.args = {
+NoStyleFlexbox.args = {
   wrapperClass : '',
   rowClass : '',
   headerClass : '',
@@ -56,27 +51,37 @@ NoStyle.args = {
     'col4' : [4, 5, 6],
     
   },
-  flex : [1, 1, 1, 1]
+  flex : [1, 1, 1, 1],
+  flexbox : true
 };
 
 
-export const NoStyleNoFlex = Template.bind({});
+export const ScrollTable = Template.bind({});
 
-NoStyleNoFlex.args = {
-  wrapperClass : '',
+ScrollTable.args = {
+  wrapperClass : 'flex',
   rowClass : '',
-  headerCellClass : '',
+  headerClass : 'flex-1',
+  headerCellClass : 'flex-1',
+  bodyClass : 'flex',
+
+  inputContainer : '',
   inputCellClass : '',
   data : {
-    'col1': [1, 2, 3], 
-    'col2' : [2, 3, 4],
-    'col3' : [3, 4, 5],
-    'col4' : [4, 5, 6],
+    'col1': [1, 2, 3, 1, 1, 1, 1], 
+    'col2' : [2, 3, 4, 1, 1, 1, 1],
+    'col3' : [3, 4, 5, 1, 1, 1, 1],
+    'col4' : [4, 5, 6, 1, 1, 1, 1],
     
   },
-  flex : []
+  // flex : [1, 1, 1, 1],
+  flexbox : false
 };
 
+export const NoParams = Template.bind({});
 
+NoParams.args = {
+
+};
 
 

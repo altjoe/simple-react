@@ -19,27 +19,31 @@ export default function VTable(props) {
 
     const displayTable = () => {
         if (typeof props.data !== 'undefined') {
+            let flex = ''
+            if (props.flexbox) {
+                flex = 'flex'
+            } 
             return (
-                <div className={`flex flex-col ${props.wrapperClass}`}>
-                    <div className={`flex ${props.headerClass}`}>
+                <div className={`${flex} ${flex}-col ${props.wrapperClass}`}>
+                    <div className={`${flex} ${props.headerClass}`}>
                         {Object.keys(props.data).map((col, i) => {
                             return <div className={`${props.headerCellClass}`}
-                                        style={{'flex' : typeof props.flex !== 'undefined' ? props.flex[i] : ''}}
+                                        style={typeof props.flex != 'undefined' ? {'flex' : props.flex[i]} : {}}
                                         key={`header-${col}`}>{col}</div>
                         })}
                     </div>
-                    <div className={`flex flex-col ${props.bodyClass}`}>
+                    <div className={`${flex} ${flex}-col ${props.bodyClass}`}>
                         {props.data[Object.keys(props.data)[0]].map((val, i) => {
                             return (
-                                <div className={`flex ${props.rowClass}`}
+                                <div className={`${flex} ${props.rowClass}`}
                                     key={`row-${i}`}>
                                     {Object.keys(props.data).map((key, j) => {
                                         return (
-                                            <div className={`flex ${props.inputContainer}`}
-                                                style={{'flex' : typeof props.flex !== 'undefined' ? props.flex[j] : ''}}
+                                            <div className={`${flex} ${props.inputContainer}`}
+                                            style={typeof props.flex != 'undefined' ? {'flex' : props.flex[j]} : {}}
                                                 onClick={event => handleFocus(`Textarea-${key}-${i}`)}
                                                 key={`inputContainer-${key}-${i}`}>
-                                                <TextArea className={`w-full m-auto ${props.inputCellClass}`}
+                                                <TextArea className={`${flex}-1 m-auto ${props.inputCellClass}`}
                                                     value={props.data[key][i]}
                                                     id={`Textarea-${key}-${i}`}
                                                     onChange={event => handleChange(key, i, event.target.value)}/>
@@ -63,6 +67,7 @@ export default function VTable(props) {
                     {`rowClass={\`\`}`}<br/>
                     {`headerClass={\`\`}`}<br/>
                     {`bodyClass={\`\`}`}<br/>
+                    {`inputContainer={\`\`}`}<br/>
                     {`headerCellClass={\`\`}`}<br/>
                     {`inputCellClass={\`\`}`}<br/>
                     {`${dataExample}`}<strong>{' <- Required'}</strong><br/>

@@ -4,7 +4,7 @@ import { tw } from '../../utils';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Table/Horizontal-Table',
+  title: 'Split-Table/Horizontal-Table',
   component: HTable,
 };
 
@@ -13,7 +13,7 @@ const Template = (args) => <HTable {...args} />;
 export const Primary = Template.bind({});
 
 Primary.args = {
-  wrapperClass : 'text-center ',
+  wrapperClass : 'text-center',
   rowClass : 'group flex-col md:flex-row landscape:flex-row',
   dataContainer : tw('flex-col md:flex-row', 
                      'group py-2 md:p-0'),
@@ -33,19 +33,28 @@ Primary.args = {
     'Email': ['test@gmail.com']
   },
   headerflex : [1, 2.5],
-  bodyflex : [1]
+  bodyflex : [1],
+  flexbox : true
 };
 
+export const NoFlexbox = Template.bind({});
 
-export const NoParams = Template.bind({});
-
-NoParams.args = {
-
+NoFlexbox.args = {
+  wrapperClass : '',
+  rowClass : '',
+  dataContainer : '',
+  headerClass : '',
+  headerCellClass : '',
+  inputContainer : '',
+  inputCellClass : '',
+  data : {'Full name': ['', '', '']},
+  placeholder : {'Full name': ['First', 'Middle', 'Last']},
+  flexbox : false
 };
 
-export const NoStyle = Template.bind({});
+export const NoStyleFlexbox = Template.bind({});
 
-NoStyle.args = {
+NoStyleFlexbox.args = {
   wrapperClass : '',
   rowClass : '',
   dataContainer : '',
@@ -56,24 +65,13 @@ NoStyle.args = {
   data : {'Full name': ['', '', '']},
   placeholder : {'Full name': ['First', 'Middle', 'Last']},
   headerflex : [1, 2.5],
-  bodyflex : [1, 1, 1]
-};
-
-export const NoFlex = Template.bind({});
-
-NoFlex.args = {
-  wrapperClass : ``,
-  rowClass : ``,
-  headerClass : ``,
-  dataClass : ``,
-  headerCellClass : ``,
-  inputContainer : ``,
-  inputCellClass : ``,
-  data : {
-    'Full name': ['', '']
-  },
-  placeholder : {'Full name': ['First', 'Last']},
-  flex : []
+  bodyflex : [1, 1, 1],
+  flexbox : true
 };
 
 
+export const NoParams = Template.bind({});
+
+NoParams.args = {
+
+};

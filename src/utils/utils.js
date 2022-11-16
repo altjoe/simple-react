@@ -1,5 +1,4 @@
 const tw = (...args) => {
-    console.log(args);
     return args.reduce((a,b) => a + ' ' + b)
 }
 
