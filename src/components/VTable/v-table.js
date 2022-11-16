@@ -24,7 +24,7 @@ export default function VTable(props) {
                     <div className={`flex ${props.headerClass}`}>
                         {Object.keys(props.data).map((col, i) => {
                             return <div className={`${props.headerCellClass}`}
-                                        style={{'flex' : props.flex[i]}}
+                                        style={{'flex' : typeof props.flex !== 'undefined' ? props.flex[i] : ''}}
                                         key={`header-${col}`}>{col}</div>
                         })}
                     </div>
@@ -36,13 +36,12 @@ export default function VTable(props) {
                                     {Object.keys(props.data).map((key, j) => {
                                         return (
                                             <div className={`flex ${props.inputContainer}`}
-                                                style={{'flex' : props.flex[j]}}
+                                                style={{'flex' : typeof props.flex !== 'undefined' ? props.flex[j] : ''}}
                                                 onClick={event => handleFocus(`Textarea-${key}-${i}`)}
                                                 key={`inputContainer-${key}-${i}`}>
                                                 <TextArea className={`w-full m-auto ${props.inputCellClass}`}
                                                     value={props.data[key][i]}
                                                     id={`Textarea-${key}-${i}`}
-                                                    
                                                     onChange={event => handleChange(key, i, event.target.value)}/>
                                             </div>
                                         )
