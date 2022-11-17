@@ -10,23 +10,36 @@ export default function Table(props) {
                 console.log('Found date type');
                 break;
             default:
-                return <div className={`${props.cell} ${props.input}`}>{val}</div>
+                return <TextArea className={`${props.cell} ${props.input}`} 
+                                style={{...props.inputstyle, ...props.cellstyle}}
+                                value={val}/>
                 break;
         }
     }
 
     const displayTable = () => {
+        
         if (typeof props.data !== 'undefined') {
             return (
-                <div className={`${props.wrapper}`}>
+                <div className={`${props.wrapper}`} style={props.wrapperstyle}>
                     {Object.keys(props.data).map(key => {
                         return (
-                            <div className={`${props.row}`}>
-                                <div className={`${props.header} ${props.cell}`}>{key}</div>
-                                {props.data[key].map((val, i) => {
-                                    const type = typeof props.types !== 'undefined' ? props.types[key] : 'undefined'
-                                    return cellType(type, val)
-                                })}
+                            <div className={`${props.row}`} style={props.rowstyle}>
+                                <div className={`${props.headercontainer}`} style={props.headercontainerstyle}>
+                                    <div className={`${props.header} ${props.cell}`} style={{...props.headerstyle, ...props.cellstyle}}>{key}</div>
+                                </div>
+                                <div className={`${props.body}`} style={props.bodystyle}>
+                                    {props.data[key].map((val, i) => {
+                                        const type = typeof props.types !== 'undefined' ? props.types[key] : 'undefined'
+                                        return (
+                                            <div className={`${props.inputcontainer}`}>
+                                                <div className={`${props.inputdisplay}`}>
+                                                    {cellType(type, val)}
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
                             </div>
                         )
                     })}
