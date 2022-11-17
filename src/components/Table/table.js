@@ -1,7 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 import TextArea from 'react-expanding-textarea'
-
+import ReactHeight from 'react-height'
 export default function Table(props) {
+    const [rowheight, setRowheight] = useState({});
+
+    const handleHeight = (height, id) => {
+        console.log(height, id);
+        if (typeof rowheight[id] !== 'undefined'){
+            if (height > rowheight[id]) {
+                console.log(height);
+                setRowheight({...rowheight, id: height})
+            }
+        } else {
+            rowheight[id] = height
+        }
+    }
 
     const cellType = (type, val) => {
         console.log(type, val)
@@ -31,10 +44,13 @@ export default function Table(props) {
                                 <div className={`${props.body}`} style={props.bodystyle}>
                                     {props.data[key].map((val, i) => {
                                         const type = typeof props.types !== 'undefined' ? props.types[key] : 'undefined'
+                                        console.log({'height' : rowheight[key]});
                                         return (
-                                            <div className={`${props.inputcontainer}`}>
-                                                <div className={`${props.inputdisplay}`}>
-                                                    {cellType(type, val)}
+                                            <div id={key} className={`${props.inputcontainer}`} style={props.inputcontainerstyle}>
+                                                <div className={`${props.inputdisplay}`} style={{...props.inputdisplaystyle, ...{'height' : rowheight[key]}}}>
+                                                    <ReactHeight onHeightReady={height => handleHeight(height, `input-${key}`)} >
+                                                        {cellType(type, val)}
+                                                    </ReactHeight>
                                                 </div>
                                             </div>
                                         )
