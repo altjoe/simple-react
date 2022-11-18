@@ -2,32 +2,44 @@ import React, { useState, useEffect, useRef } from 'react';
 import TextArea from 'react-expanding-textarea'
 import ReactHeight from 'react-height'
 export default function Table(props) {
-    const [rowheight, setRowheight] = useState({});
 
-    const handleHeight = (height, id) => {
-        console.log(height, id);
-        if (typeof rowheight[id] !== 'undefined'){
-            if (height > rowheight[id]) {
-                console.log(height);
-                setRowheight({...rowheight, id: height})
+    if (props.align || typeof props.align === 'undefined') {
+        useEffect(() => {
+            if (typeof props.data !== 'undefined') {
+                Object.keys(props.data).forEach((key, i) => {
+                    const elements = document.getElementsByName(i)
+                    let height = 0
+                    elements.forEach(element => {
+                        if (height < element.clientHeight) {
+                            height = element.clientHeight
+                        }
+                    })
+                    elements.forEach(element => {
+                        element.style.height = `${height}px`
+                    })
+                })
             }
-        } else {
-            rowheight[id] = height
-        }
+        }, []);
     }
+    
 
-    const cellType = (type, val) => {
-        console.log(type, val)
+    const cellType = (type, val, id) => {
         switch (typeof type) {
             case 'date':
                 console.log('Found date type');
                 break;
             default:
                 return <TextArea className={`${props.cell} ${props.input}`} 
-                                style={{...props.inputstyle, ...props.cellstyle}}
-                                value={val}/>
+                                        style={{...props.inputstyle, ...props.cellstyle}}
+                                        value={val} 
+                                        id={id}/>
                 break;
         }
+    }
+
+    const handleFocus = (id) => {
+        const element = document.getElementById(id)
+        element.focus()
     }
 
     const displayTable = () => {
@@ -44,13 +56,10 @@ export default function Table(props) {
                                 <div className={`${props.body}`} style={props.bodystyle}>
                                     {props.data[key].map((val, i) => {
                                         const type = typeof props.types !== 'undefined' ? props.types[key] : 'undefined'
-                                        console.log({'height' : rowheight[key]});
                                         return (
-                                            <div id={key} className={`${props.inputcontainer}`} style={props.inputcontainerstyle}>
-                                                <div className={`${props.inputdisplay}`} style={{...props.inputdisplaystyle, ...{'height' : rowheight[key]}}}>
-                                                    <ReactHeight onHeightReady={height => handleHeight(height, `input-${key}`)} >
-                                                        {cellType(type, val)}
-                                                    </ReactHeight>
+                                            <div onClick={event => handleFocus(`${key}-${i}`)} className={`${props.inputcontainer}`} style={props.inputcontainerstyle}>
+                                                <div name={i} className={`${props.inputdisplay}`} style={props.inputdisplaystyle}>
+                                                    {cellType(type, val, `${key}-${i}`)}
                                                 </div>
                                             </div>
                                         )

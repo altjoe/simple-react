@@ -46,7 +46,9 @@ Horizontal_Style1.args = {
     },
     types : {
         'Date' : 'date'
-    }
+    },
+    align : true,
+
 };
 
 export const Horizontal_Style2 = Template.bind({});
@@ -81,7 +83,8 @@ Horizontal_Style2.args = {
     },
     types : {
         'Date' : 'date'
-    }
+    },
+    align : true
 };
 
 export const Vertical_Style1 = Template.bind({});
@@ -117,17 +120,18 @@ Vertical_Style1.args = {
     },
     types : {
         'Date' : 'date'
-    }
+    },
+    align : true
 };
 
 export const Vertical_Style2 = Template.bind({});
 
 Vertical_Style2.args = {
-    wrapper : tw('flex flex-col flex-wrap pb-3', 
-                 'overflow-scroll snap-x snap-proximity', 
-                 'md:flex-row md:flex-nowrap'),
+    wrapper : tw(' flex flex-col flex-wrap pb-3', 
+                 'overflow-scroll overflow-y-hidden snap-x snap-proximity', 
+                 'md:flex-row md:flex-nowrap md:overflow-x-hidden'),
     row : 'flex flex-1 flex-row md:flex-col group',
-    header : 'flex-1 px-0 py-1',
+    header : 'flex-1 px-0 py-1 m-auto',
     headercontainer : tw('flex bg-green-100 p-1', 
                          'min-w-max sticky left-0', 
                          'group-first:rounded-t-md group-last:rounded-b-md',
@@ -135,11 +139,11 @@ Vertical_Style2.args = {
                          'md:flex md:flex-1 md:group-first:rounded-l-md md:group-last:rounded-r-md'), 
     body : tw('flex md:flex-col flex-row',
               ''),
-    input : 'flex-1 resize-none outline-none bg-transparent',
+    input : 'flex-1 resize-none outline-none bg-transparent m-auto',
     inputdisplay : tw('flex flex-1 self-center rounded-md',
                       'hover:bg-slate-200', 
                       ''),
-    inputcontainer : tw('snap-end focus:snap-start flex border-b p-1'), 
+    inputcontainer : tw('flex border-b p-1'), 
     cell : 'text-center',
 
     wrapperstyle : {},
@@ -160,9 +164,7 @@ Vertical_Style2.args = {
     },
     types : {
         'Date' : 'date'
-    },
-    fillempty : true
-
+    }
 };
 
 export const NoStyle = Template.bind({});
@@ -187,6 +189,8 @@ NoStyle.args = {
     inputdisplaystyle : {},
     inputcontainerstyle : {},
     cellstyle : {},
+
+    align : true,
 
     data : {
         'Date' : ['10/22/30'],
