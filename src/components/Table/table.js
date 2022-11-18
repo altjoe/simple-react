@@ -5,25 +5,54 @@ export default function Table(props) {
 
     if (props.align || typeof props.align === 'undefined') {
         useEffect(() => {
-            if (typeof props.data !== 'undefined') {
+            handleAlign()
+            window.addEventListener("resize", handleAlign);
+
+            return () => window.removeEventListener("resize", handleAlign);
+        }, []);
+    }
+
+    const handleAlign = () => {
+        if (typeof props.data !== 'undefined') {
+            const row = document.getElementById('row')
+            const computedstyle = window.getComputedStyle(row)
+            console.log(computedstyle.flexDirection);
+            if (computedstyle.flexDirection === 'column') {
                 Object.keys(props.data).forEach((key, i) => {
-                    const elements = document.getElementsByName(i)
+            
+                    const inputs = document.getElementsByName(`input-${i}`)
                     let height = 0
-                    elements.forEach(element => {
-                        if (height < element.clientHeight) {
-                            height = element.clientHeight
+                    inputs.forEach((input, i) => {
+                        if (height < input.clientHeight) {
+                            height = input.clientHeight
                         }
                     })
-                    elements.forEach(element => {
-                        element.style.height = `${height}px`
+                    const containers = document.getElementsByName(i)
+                    containers.forEach(container => {
+                        container.style.height = `${height}px`
+                    })
+                })
+            } else {
+                // this will be to shrink rows back to correct height
+                Object.keys(props.data).forEach((key, i) => {
+                    const inputs = document.getElementsByName(`/input-${i}/`)
+                    let height = 0
+                    inputs.forEach((input, i) => {
+                        if (height < input.clientHeight) {
+                            height = input.clientHeight
+                        }
+                    })
+                    const containers = document.getElementsByName(i)
+                    containers.forEach(container => {
+                        container.style.height = `${height}px`
                     })
                 })
             }
-        }, []);
+        }
     }
     
 
-    const cellType = (type, val, id) => {
+    const cellType = (type, val, id, key) => {
         switch (typeof type) {
             case 'date':
                 console.log('Found date type');
@@ -32,7 +61,8 @@ export default function Table(props) {
                 return <TextArea className={`${props.cell} ${props.input}`} 
                                         style={{...props.inputstyle, ...props.cellstyle}}
                                         value={val} 
-                                        id={id}/>
+                                        id={id}
+                                        name={`input-${key}`}/>
                 break;
         }
     }
@@ -49,7 +79,7 @@ export default function Table(props) {
                 <div className={`${props.wrapper}`} style={props.wrapperstyle}>
                     {Object.keys(props.data).map(key => {
                         return (
-                            <div className={`${props.row}`} style={props.rowstyle}>
+                            <div id={'row'} className={`${props.row}`} style={props.rowstyle}>
                                 <div className={`${props.headercontainer}`} style={props.headercontainerstyle}>
                                     <div className={`${props.header} ${props.cell}`} style={{...props.headerstyle, ...props.cellstyle}}>{key}</div>
                                 </div>
@@ -59,7 +89,7 @@ export default function Table(props) {
                                         return (
                                             <div onClick={event => handleFocus(`${key}-${i}`)} className={`${props.inputcontainer}`} style={props.inputcontainerstyle}>
                                                 <div name={i} className={`${props.inputdisplay}`} style={props.inputdisplaystyle}>
-                                                    {cellType(type, val, `${key}-${i}`)}
+                                                    {cellType(type, val, `${key}-${i}`, i)}
                                                 </div>
                                             </div>
                                         )

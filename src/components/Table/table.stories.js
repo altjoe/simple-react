@@ -127,7 +127,7 @@ Vertical_Style1.args = {
 export const Vertical_Style2 = Template.bind({});
 
 Vertical_Style2.args = {
-    wrapper : tw(' flex flex-col flex-wrap pb-3', 
+    wrapper : tw('max-h-max flex flex-col flex-wrap pb-3', 
                  'overflow-scroll overflow-y-hidden snap-x snap-proximity', 
                  'md:flex-row md:flex-nowrap md:overflow-x-hidden'),
     row : 'flex flex-1 flex-row md:flex-col group',
@@ -139,7 +139,7 @@ Vertical_Style2.args = {
                          'md:flex md:flex-1 md:group-first:rounded-l-md md:group-last:rounded-r-md'), 
     body : tw('flex md:flex-col flex-row',
               ''),
-    input : 'flex-1 resize-none outline-none bg-transparent m-auto',
+    input : 'resize-none outline-none bg-transparent m-auto',
     inputdisplay : tw('flex flex-1 self-center rounded-md',
                       'hover:bg-slate-200', 
                       ''),
@@ -157,14 +157,15 @@ Vertical_Style2.args = {
     cellstyle : {},
 
     data : {
-        'Full Name' : ['Jolsakjdf;ajksdf;kajsdlkjlkjsdlfkjsdfhf;kajsdhf;aksdjfha;skdjfhas;kdfjhase', 'Roy David', 1, 2],
+        'Full Name' : ['Jolsakjdf;ajksdf;kajsdhf;kajsdhf;aksdjfha;skdjfhas;kdfjhaseJolsakjdf;ajksdf;kajsdlkjlkjsdlfkjsdfhf;kajsdhf;aksdjfha;skdjfhas;kdfjhase', 'Roy David', 1, 2],
         'Date' : ['10/22/30', '10/12/22', 2, 3],
-        'Email' : ['meyer.joer5@gmail.com', 'roy.david@gmail.com', 2, 3],
+        'Email' : ['meyer.joer5@gmail.commeyer.joer5@gmail.commeyer.joer5@gmail.commeyer.joer5@gmail.commeyer.joer5@gmail.commeyer.joer5@gmail.commeyer.joer5@gmail.com', 'roy.david@gmail.com', 2, 3],
         'Friends' : ['Roy', 'Joe', 'me', 1]
     },
     types : {
         'Date' : 'date'
-    }
+    },
+    align : true
 };
 
 export const NoStyle = Template.bind({});
