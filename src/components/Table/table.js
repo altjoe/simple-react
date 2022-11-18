@@ -17,34 +17,37 @@ export default function Table(props) {
             const row = document.getElementById('row')
             const computedstyle = window.getComputedStyle(row)
             console.log(computedstyle.flexDirection);
-            if (computedstyle.flexDirection === 'column') {
-                Object.keys(props.data).forEach((key, i) => {
-            
-                    const inputs = document.getElementsByName(`input-${i}`)
+            if (computedstyle.flexDirection === props.aligndirection) {
+                props.data[Object.keys(props.data)[0]].forEach((val, i) => {
+                    const inputs = document.getElementsByClassName(`${i}-input`)
+
                     let height = 0
-                    inputs.forEach((input, i) => {
-                        if (height < input.clientHeight) {
-                            height = input.clientHeight
+                    Object.keys(inputs).forEach(key => {
+                        if (height < inputs[key].clientHeight) {
+                            height = inputs[key].clientHeight
                         }
                     })
-                    const containers = document.getElementsByName(i)
-                    containers.forEach(container => {
-                        container.style.height = `${height}px`
+                    const containers = document.getElementsByClassName(`${i}-inputcontainer`)
+                    Object.keys(containers).forEach(key => {
+                        containers[key].style.height = `${height}px`
                     })
                 })
             } else {
-                // this will be to shrink rows back to correct h
+                
                 Object.keys(props.data).forEach((key, i) => {
-                    const inputs = document.getElementsByName(`input-${i}`)
+                    const inputs = document.getElementsByClassName(`${key}-input`)
+
+                    console.log(inputs);
+
                     let height = 0
-                    inputs.forEach((input, i) => {
-                        if (height < input.clientHeight) {
-                            height = input.clientHeight
+                    Object.keys(inputs).forEach(key => {
+                        if (height < inputs[key].clientHeight) {
+                            height = inputs[key].clientHeight
                         }
                     })
-                    const containers = document.getElementsByName(i)
-                    containers.forEach(container => {
-                        container.style.height = `${height}px`
+                    const containers = document.getElementsByClassName(`${key}-inputcontainer`)
+                    Object.keys(containers).forEach(key => {
+                        containers[key].style.height = `${height}px`
                     })
                 })
             }
@@ -52,17 +55,15 @@ export default function Table(props) {
     }
     
 
-    const cellType = (type, val, id, key) => {
+    const cellType = (type, val, key, index) => {
         switch (typeof type) {
             case 'date':
                 console.log('Found date type');
                 break;
             default:
-                return <TextArea className={`${props.cell} ${props.input}`} 
+                return <TextArea className={`${key}-input ${index}-input ${props.cell} ${props.input}`} 
                                         style={{...props.inputstyle, ...props.cellstyle}}
-                                        value={val} 
-                                        id={id}
-                                        name={`input-${key}`}/>
+                                        value={val}/>
                 break;
         }
     }
@@ -76,8 +77,8 @@ export default function Table(props) {
         
         if (typeof props.data !== 'undefined') {
             return (
-                <div className={`${props.wrapper}`} style={props.wrapperstyle}>
-                    {Object.keys(props.data).map(key => {
+                <div id='wrapper' className={`${props.wrapper}`} style={props.wrapperstyle}>
+                    {Object.keys(props.data).map((key, j) => {
                         return (
                             <div id={'row'} className={`${props.row}`} style={props.rowstyle}>
                                 <div className={`${props.headercontainer}`} style={props.headercontainerstyle}>
@@ -86,10 +87,14 @@ export default function Table(props) {
                                 <div className={`${props.body}`} style={props.bodystyle}>
                                     {props.data[key].map((val, i) => {
                                         const type = typeof props.types !== 'undefined' ? props.types[key] : 'undefined'
+                                        const focusid = `${key}-${i}`
                                         return (
-                                            <div onClick={event => handleFocus(`${key}-${i}`)} className={`${props.inputcontainer}`} style={props.inputcontainerstyle}>
-                                                <div name={i} className={`${props.inputdisplay}`} style={props.inputdisplaystyle}>
-                                                    {cellType(type, val, `${key}-${i}`, i)}
+                                            <div onClick={event => handleFocus(focusid)} 
+                                                 className={`${props.inputcontainer}`} 
+                                                 style={props.inputcontainerstyle}>
+                                                <div className={`${key}-inputcontainer ${i}-inputcontainer ${props.inputdisplay}`} 
+                                                     style={props.inputdisplaystyle}>
+                                                    {cellType(type, val, key, i, focusid)}
                                                 </div>
                                             </div>
                                         )

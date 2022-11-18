@@ -105,8 +105,8 @@ Vertical_Style1.args = {
     wrapperstyle : {},
     rowstyle : {},
     headerstyle : {},
-    headercontainerstyle : {},
-    bodystyle : {},
+    headercontainerstyle : {'flex': 1},
+    bodystyle : {'flex' : 5},
     inputstyle : {},
     inputdisplaystyle : {},
     inputcontainerstyle : {},
@@ -121,7 +121,8 @@ Vertical_Style1.args = {
     types : {
         'Date' : 'date'
     },
-    align : true
+    align : true,
+    aligndirection : 'row'
 };
 
 export const Vertical_Style2 = Template.bind({});
@@ -129,21 +130,21 @@ export const Vertical_Style2 = Template.bind({});
 Vertical_Style2.args = {
     wrapper : tw('max-h-max flex flex-col flex-wrap pb-3', 
                  'overflow-scroll overflow-y-hidden snap-x snap-proximity', 
-                 'md:flex-row md:flex-nowrap md:overflow-x-hidden'),
+                 'md:flex-row md:flex-nowrap '),
     row : 'flex flex-1 flex-row md:flex-col group',
     header : 'flex md:flex-1 px-0 py-1 m-auto justify-center',
     headercontainer : tw('flex bg-green-100 p-1', 
-                         'min-w-max sticky left-0', 
+                         'min-w-min sticky left-0', 
                          'group-first:rounded-t-md group-last:rounded-b-md',
                          'sm:px-2',
                          'md:flex md:flex-1 md:group-first:rounded-l-md md:group-last:rounded-r-md'), 
     body : tw('flex md:flex-col flex-row',
               ''),
     input : 'flex-1 resize-none outline-none bg-transparent m-auto',
-    inputdisplay : tw('flex flex-1 self-center rounded-md',
+    inputdisplay : tw('flex self-center rounded-md',
                       'hover:bg-slate-200', 
                       ''),
-    inputcontainer : tw('flex border-b p-1'), 
+    inputcontainer : tw('flex flex-1 border-b p-1'), 
     cell : 'text-center',
 
     wrapperstyle : {},
@@ -160,12 +161,15 @@ Vertical_Style2.args = {
         'Full Name' : ['Jolsakjdf;ajksdf;kajsdhf;kajsdhf;aksdjfha;skdjfhas;kdfjhaseJolsakjdf;ajksdf;kajsdlkjlkjsdlfkjsdfhf;kajsdhf;aksdjfha;skdjfhas;kdfjhase', 'Roy David', 1, 2],
         'Date' : ['10/22/30', '10/12/22', 2, 3],
         'Email' : ['meyer.joer5@gmail.commeyer.joer5@gmail.commeyer.joer5@gmail.commeyer.joer5@gmail.commeyer.joer5@gmail.commeyer.joer5@gmail.commeyer.joer5@gmail.com', 'roy.david@gmail.com', 2, 3],
-        'Friends' : ['Roy', 'Joe', 'me', 1]
+        'Friends' : ['Roy', 'Joe', 'me', 1],
+        'description' : ['This is a big ole test for description ', '', '', '']
     },
     types : {
         'Date' : 'date'
     },
-    align : true
+    align : true,
+    aligndirection : 'column',
+    fillempty : false
 };
 
 export const NoStyle = Template.bind({});
