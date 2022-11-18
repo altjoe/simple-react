@@ -33,9 +33,9 @@ export default function Table(props) {
                     })
                 })
             } else {
-                // this will be to shrink rows back to correct height
+                // this will be to shrink rows back to correct h
                 Object.keys(props.data).forEach((key, i) => {
-                    const inputs = document.getElementsByName(`/input-${i}/`)
+                    const inputs = document.getElementsByName(`input-${i}`)
                     let height = 0
                     inputs.forEach((input, i) => {
                         if (height < input.clientHeight) {
