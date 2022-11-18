@@ -131,7 +131,7 @@ Vertical_Style2.args = {
                  'overflow-scroll overflow-y-hidden snap-x snap-proximity', 
                  'md:flex-row md:flex-nowrap md:overflow-x-hidden'),
     row : 'flex flex-1 flex-row md:flex-col group',
-    header : 'flex md:flex-1 px-0 py-1 m-auto',
+    header : 'flex md:flex-1 px-0 py-1 m-auto justify-center',
     headercontainer : tw('flex bg-green-100 p-1', 
                          'min-w-max sticky left-0', 
                          'group-first:rounded-t-md group-last:rounded-b-md',
