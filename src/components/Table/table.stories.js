@@ -133,8 +133,8 @@ Vertical_Style2.args = {
     wrapper : tw('max-h-max flex flex-col flex-wrap pb-3', 
                  'overflow-scroll overflow-y-hidden snap-x snap-proximity', 
                  'sm:flex-row sm:flex-nowrap '),
-    row : 'flex flex-1 flex-row sm:flex-col group',
-    header : 'flex sm:flex-1 px-0 py-1 m-auto justify-center',
+    row : 'group flex flex-1 flex-row sm:flex-col',
+    header : 'flex flex-1 px-0 py-1 m-auto justify-center',
     headercontainer : tw('flex bg-green-100 p-1', 
                          'min-w-min sticky left-0', 
                          'group-first:rounded-t-md group-last:rounded-b-md',
@@ -146,7 +146,7 @@ Vertical_Style2.args = {
     inputdisplay : tw('flex flex-1 self-center rounded-md',
                       'hover:bg-slate-200', 
                       ''),
-    inputcontainer : tw('flex flex-1 border-b p-1'), 
+    inputcontainer : tw('flex flex-1 border-b p-1 '), 
     cell : 'text-center',
 
     wrapperstyle : {},
@@ -164,18 +164,26 @@ Vertical_Style2.args = {
         'Date' : ['', '', '', ''],
         'Email' : ['meyer.joer5@gmail.commeyer.joer5@gmail.commeyer.joer5@gmail.commeyer.joer5@gmail.commeyer.joer5@gmail.commeyer.joer5@gmail.commeyer.joer5@gmail.com', 'roy.david@gmail.com', 2, 3],
         'Friends' : ['Roy', 'Joe', 'me', 1],
-        'description' : ['This is a big ole test for description ', '', '', '']
+        'description' : ['This is a big ole test for description ', '', '', ''],
+        'Action' : ['', '', '', '']
     },
     custom : {
         'Date' : {'element' : 'input', 
-            'args' : {'type' : 'date', 'className' : 'flex-1 text-center bg-transparent'}
-        }
+            'args' : {'type' : 'date', 'className' : 'flex-1 text-center bg-transparent focus:outline-none'}
+        }, 
+        'Action' : {
+            'element' : 'button', 
+            'args' : {
+                'className' : ' min-w-min bg-red-200 rounded-lg px-2 py-1 ml-auto my-auto', 
+                'onClick' : event => console.log('test click')
+            },
+            'label' : 'X'}
     },
+    flex : [1, 1, 3, 1, 1, 0.2],
     align : true,
     aligndirection : 'column',
     fillempty : false
 };
-
 
 
 export const TestSpeedTable = Template.bind({});
@@ -188,7 +196,7 @@ TestSpeedTable.args = {
                          'group-first:rounded-t-lg group-last:rounded-b-lg'), 
     body : 'flex px-2',
     input : 'flex-1 border-b resize-none bg-transparent outline-none p-1 text-center self-center hover:cursor-pointer',
-    inputdisplay : tw('flex flex-1 self-center mx-2',
+    inputdisplay : tw('flex flex-1 self-center mx-2 rounded-lg',
                       'hover:bg-slate-100',
                       'focus-within:bg-slate-100 focus:bg-green-200'),
     inputcontainer : 'flex flex-1', 
@@ -210,7 +218,7 @@ TestSpeedTable.args = {
         'Email:' : ['']
     },
     custom : {
-        'Date:' : {'element' : 'input', 'args' : {'type' : 'date', 'className' : 'flex-1 border-b bg-transparent outline-none p-1 text-center self-center hover:cursor-pointer'}}
+        'Date:' : {'element' : 'input', 'args' : {'type' : 'date', 'className' : 'flex-1 border-b bg-transparent outline-none p-1 text-center self-center hover:cursor-pointer  rounded-lg'}}
     },
     
     align : true,

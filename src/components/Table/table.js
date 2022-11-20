@@ -56,18 +56,30 @@ export default function Table(props) {
 
     const cellType = (custom, val, key, index, focusid) => {
 
-        console.log(typeof custom);
-
         if (typeof custom === 'object'){
             // props.customElement.style.className = ` ${key}-input ${index}-input `
 
             const Element = custom['element']
-            let args = custom['args']
-            args.className += ` ${key}-input ${index}-input`
+            let args = {} 
+            if (typeof custom['args'] == 'object') {
+                args = custom['args']
+                console.log(args.className);
+                if (typeof args.className !== 'undefined') {
+                    args['className'] += ` ${key}-input ${index}-input`
+                } else {
+                    args = {...args, 'className' : `${key}-input ${index}-input`}
+                }
+                
+            }
 
-            return <Element id={focusid} {...args} />
-        } else if (typeof custom === 'Object') {
-            console.log(custom);
+            console.log(custom['args'].label);
+            if (typeof custom['label'] === 'undefined') {
+                return <Element id={focusid} {...args} />
+            } else {
+                console.log('here', key, custom['label']);
+                return <Element id={focusid} {...args}>{custom['label']}</Element>
+            }
+            
         }
         else {
             return <TextArea className={`${key}-input ${index}-input ${props.cell} ${props.input}`} 
@@ -89,15 +101,17 @@ export default function Table(props) {
             return (
                 <div id='wrapper' className={`${props.wrapper}`} style={props.wrapperstyle}>
                     {Object.keys(props.data).map((key, j) => {
+
                         return (
                             <div id={'row'} className={`${props.row}`} style={props.rowstyle}>
                                 <div className={`${props.headercontainer}`} style={props.headercontainerstyle}>
-                                    <div className={`${props.header} ${props.cell}`} style={{...props.headerstyle, ...props.cellstyle}}>{key}</div>
+                                    <div className={`${props.header} ${props.cell}`} style={{...props.headerstyle, ...props.cellstyle}}>{key !== 'Action' ? key : ''}</div>
                                 </div>
                                 <div className={`${props.body}`} style={props.bodystyle}>
                                     {props.data[key].map((val, i) => {
                                         const custom = typeof props.custom !== 'undefined' ? props.custom[key] : 'undefined'
                                         const focusid = `${key}-${i}`
+
                                         return (
                                             <div onClick={event => handleFocus(focusid)} 
                                                  className={`${props.inputcontainer}`} 
