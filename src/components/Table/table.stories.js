@@ -1,7 +1,9 @@
 import React from 'react';
 import Table from './table';
 import { tw } from '../../utils';
-
+import ReactDatePicker from 'react-datepicker';
+import TextArea from 'react-expanding-textarea'
+// import 'react-datepicker/dist/react-datepicker.css'
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Table/Table',
@@ -39,7 +41,7 @@ Horizontal_Style1.args = {
     cellstyle : {},
 
     data : {
-        'Date' : ['10/22/30'],
+        'Date' : [''],
         'Full Name' : ['Joe', 'Meyer'],
         'Email' : ['meyer.joer5@gmail.com'],
         'Friends' : ['none', 'except', 'me']
@@ -130,18 +132,18 @@ export const Vertical_Style2 = Template.bind({});
 Vertical_Style2.args = {
     wrapper : tw('max-h-max flex flex-col flex-wrap pb-3', 
                  'overflow-scroll overflow-y-hidden snap-x snap-proximity', 
-                 'md:flex-row md:flex-nowrap '),
-    row : 'flex flex-1 flex-row md:flex-col group',
-    header : 'flex md:flex-1 px-0 py-1 m-auto justify-center',
+                 'sm:flex-row sm:flex-nowrap '),
+    row : 'flex flex-1 flex-row sm:flex-col group',
+    header : 'flex sm:flex-1 px-0 py-1 m-auto justify-center',
     headercontainer : tw('flex bg-green-100 p-1', 
                          'min-w-min sticky left-0', 
                          'group-first:rounded-t-md group-last:rounded-b-md',
                          'sm:px-2',
-                         'md:flex md:flex-1 md:group-first:rounded-l-md md:group-last:rounded-r-md'), 
-    body : tw('flex md:flex-col flex-row',
+                         'sm:flex sm:flex-1 sm:group-first:rounded-l-md sm:group-last:rounded-r-md'), 
+    body : tw('flex sm:flex-col flex-row',
               ''),
     input : 'flex-1 resize-none outline-none bg-transparent m-auto',
-    inputdisplay : tw('flex self-center rounded-md',
+    inputdisplay : tw('flex flex-1 self-center rounded-md',
                       'hover:bg-slate-200', 
                       ''),
     inputcontainer : tw('flex flex-1 border-b p-1'), 
@@ -159,18 +161,110 @@ Vertical_Style2.args = {
 
     data : {
         'Full Name' : ['Jolsakjdf;ajksdf;kajsdhf;kajsdhf;aksdjfha;skdjfhas;kdfjhaseJolsakjdf;ajksdf;kajsdlkjlkjsdlfkjsdfhf;kajsdhf;aksdjfha;skdjfhas;kdfjhase', 'Roy David', 1, 2],
-        'Date' : ['10/22/30', '10/12/22', 2, 3],
+        'Date' : ['', '', '', ''],
         'Email' : ['meyer.joer5@gmail.commeyer.joer5@gmail.commeyer.joer5@gmail.commeyer.joer5@gmail.commeyer.joer5@gmail.commeyer.joer5@gmail.commeyer.joer5@gmail.com', 'roy.david@gmail.com', 2, 3],
         'Friends' : ['Roy', 'Joe', 'me', 1],
         'description' : ['This is a big ole test for description ', '', '', '']
     },
-    types : {
-        'Date' : 'date'
+    custom : {
+        'Date' : {'element' : 'input', 
+            'args' : {'type' : 'date', 'className' : 'flex-1 text-center bg-transparent'}
+        }
     },
     align : true,
     aligndirection : 'column',
     fillempty : false
 };
+
+
+
+export const TestSpeedTable = Template.bind({});
+
+TestSpeedTable.args = {
+    wrapper : '',
+    row : 'flex group select-none',
+    header : 'select-none',
+    headercontainer : tw('select-none bg-red-100 p-2', 
+                         'group-first:rounded-t-lg group-last:rounded-b-lg'), 
+    body : 'flex px-2',
+    input : 'flex-1 border-b resize-none bg-transparent outline-none p-1 text-center self-center hover:cursor-pointer',
+    inputdisplay : tw('flex flex-1 self-center mx-2',
+                      'hover:bg-slate-100',
+                      'focus-within:bg-slate-100 focus:bg-green-200'),
+    inputcontainer : 'flex flex-1', 
+    cell : '',
+
+    wrapperstyle : {},
+    rowstyle : {},
+    headerstyle : {},
+    headercontainerstyle : {'flex' : 1},
+    bodystyle : {'flex': 3},
+    inputstyle : {},
+    inputdisplaystyle : {},
+    inputcontainerstyle : {},
+    cellstyle : {},
+    
+    data : {
+        'Customer:' : ['', ''],
+        'Date:' : [''],
+        'Email:' : ['']
+    },
+    custom : {
+        'Date:' : {'element' : 'input', 'args' : {'type' : 'date', 'className' : 'flex-1 border-b bg-transparent outline-none p-1 text-center self-center hover:cursor-pointer'}}
+    },
+    
+    align : true,
+    aligndirection : 'column',
+    fillempty : false
+
+};
+
+export const TestSpeedTable2 = Template.bind({});
+
+
+TestSpeedTable2.args = {
+    wrapper : '',
+    row : 'flex group select-none',
+    header : '',
+    headercontainer : tw('bg-red-100 p-2', 
+                         'group-first:rounded-t-lg group-last:rounded-b-lg'), 
+    body : 'flex px-2',
+    input : 'flex-1 resize-none bg-transparent outline-none p-1 py-2 text-center self-center hover:cursor-pointer ',
+    inputdisplay : tw('flex flex-1 self-center px-1 rounded-lg',
+                      'hover:bg-slate-100',
+                      'focus-within:bg-slate-100 focus:bg-green-200'),
+    inputcontainer : 'flex flex-1 border-b', 
+    cell : '',
+
+    wrapperstyle : {},
+    rowstyle : {},
+    headerstyle : {},
+    headercontainerstyle : {'flex' : 1},
+    bodystyle : {'flex': 3},
+    inputstyle : {},
+    inputdisplaystyle : {},
+    inputcontainerstyle : {},
+    cellstyle : {},
+
+    data : {
+        'Order In:' : ['', '', ''],
+        'Completed:' : [''],
+    },
+
+    custom : {
+        'Order In:' : {'element' : 'input', 
+            'args' : {'type' : 'date', 'className' : 'flex-1 bg-transparent text-center'}
+        },
+        'Completed:' : {'element' : 'input', 
+            'args' : {'type' : 'date', 'className' : 'flex-1 bg-transparent text-center'}
+        }
+    },
+    align : false,
+    aligndirection : 'column',
+    fillempty : false
+
+};
+
 
 export const NoStyle = Template.bind({});
 
@@ -195,8 +289,6 @@ NoStyle.args = {
     inputcontainerstyle : {},
     cellstyle : {},
 
-    align : true,
-
     data : {
         'Date' : ['10/22/30'],
         'Full Name' : ['Joe', 'Meyer'],
@@ -206,6 +298,8 @@ NoStyle.args = {
     types : {
         'Date' : 'date'
     },
+    align : true,
+    aligndirection : 'column',
     fillempty : false
 
 };

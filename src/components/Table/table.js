@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import TextArea from 'react-expanding-textarea'
-import ReactHeight from 'react-height'
+
+
 export default function Table(props) {
 
     if (props.align || typeof props.align === 'undefined') {
@@ -16,7 +17,7 @@ export default function Table(props) {
         if (typeof props.data !== 'undefined') {
             const row = document.getElementById('row')
             const computedstyle = window.getComputedStyle(row)
-            console.log(computedstyle.flexDirection);
+
             if (computedstyle.flexDirection === props.aligndirection) {
                 props.data[Object.keys(props.data)[0]].forEach((val, i) => {
                     const inputs = document.getElementsByClassName(`${i}-input`)
@@ -36,9 +37,7 @@ export default function Table(props) {
                 
                 Object.keys(props.data).forEach((key, i) => {
                     const inputs = document.getElementsByClassName(`${key}-input`)
-
-                    console.log(inputs);
-
+                    
                     let height = 0
                     Object.keys(inputs).forEach(key => {
                         if (height < inputs[key].clientHeight) {
@@ -55,22 +54,33 @@ export default function Table(props) {
     }
     
 
-    const cellType = (type, val, key, index) => {
-        switch (typeof type) {
-            case 'date':
-                console.log('Found date type');
-                break;
-            default:
-                return <TextArea className={`${key}-input ${index}-input ${props.cell} ${props.input}`} 
-                                        style={{...props.inputstyle, ...props.cellstyle}}
-                                        value={val}/>
-                break;
+    const cellType = (custom, val, key, index, focusid) => {
+
+        console.log(typeof custom);
+
+        if (typeof custom === 'object'){
+            // props.customElement.style.className = ` ${key}-input ${index}-input `
+
+            const Element = custom['element']
+            let args = custom['args']
+            args.className += ` ${key}-input ${index}-input`
+
+            return <Element id={focusid} {...args} />
+        } else if (typeof custom === 'Object') {
+            console.log(custom);
+        }
+        else {
+            return <TextArea className={`${key}-input ${index}-input ${props.cell} ${props.input}`} 
+                                    style={{...props.inputstyle, ...props.cellstyle}}
+                                    value={val}
+                                    id={focusid}/>
         }
     }
 
     const handleFocus = (id) => {
         const element = document.getElementById(id)
         element.focus()
+        
     }
 
     const displayTable = () => {
@@ -86,7 +96,7 @@ export default function Table(props) {
                                 </div>
                                 <div className={`${props.body}`} style={props.bodystyle}>
                                     {props.data[key].map((val, i) => {
-                                        const type = typeof props.types !== 'undefined' ? props.types[key] : 'undefined'
+                                        const custom = typeof props.custom !== 'undefined' ? props.custom[key] : 'undefined'
                                         const focusid = `${key}-${i}`
                                         return (
                                             <div onClick={event => handleFocus(focusid)} 
@@ -94,7 +104,7 @@ export default function Table(props) {
                                                  style={props.inputcontainerstyle}>
                                                 <div className={`${key}-inputcontainer ${i}-inputcontainer ${props.inputdisplay}`} 
                                                      style={props.inputdisplaystyle}>
-                                                    {cellType(type, val, key, i, focusid)}
+                                                    {cellType(custom, val, key, i, focusid)}
                                                 </div>
                                             </div>
                                         )
