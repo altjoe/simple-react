@@ -4,13 +4,28 @@ import TextArea from 'react-expanding-textarea'
 
 export default function SimpTable(props) {
 
-    const handleClick = (id) => {
+    const handleClick = (event, id) => {
         const element = document.getElementById(id)
-        if (typeof element !== 'undefined') {
+        if (typeof element !== 'undefined' && event.target.id !== id) {
             element.focus()
             element.setSelectionRange(element.value.length, element.value.length)
-
         }
+    }
+
+    const handleElement = (key, j) => {
+        if (typeof props.customElements !== 'undefined' && Object.keys(props.customElements).includes(key)) {
+            const Element = props.customElements[key]
+
+            return <Element id={`${key}-${j}`} {...props.customArgs} value={props.data[key][j]}/>
+        } 
+        
+        if (typeof props.groupedCustomElements !== 'undefined' && Object.keys(props.groupedCustomElements).includes(key)) {
+            return props.groupedCustomElements[key]
+        }
+        
+        return <TextArea id={`${key}-${j}`} className={props.inputClass} value={props.data[key][j]} onChange={props.onChange}/>
+        
+
     }
 
     const calculateRow = () => {
@@ -18,15 +33,15 @@ export default function SimpTable(props) {
             let row = props.data[key].map((val, j) => {
                 return (
                     <td className={`${props.inputContainerClass}`}>
-                        <div onClick={event => handleClick(`${key}-${j}`)} className={props.inputDisplayClass}>
-                            <TextArea id={`${key}-${j}`} className={props.inputClass} value={props.data[key][j]} />
+                        <div onClick={event => handleClick(event, `${key}-${j}`)} className={props.inputDisplayClass}>
+                            {handleElement(key, j)}
                         </div>
                     </td>
                 )
             })
             row.unshift(
                 <th className={`${props.titleContainerClass}`}>
-                    <div className={props.titleDisplayClass}>{key}</div>
+                    <div className={props.titleDisplayClass}>{props.hidecolumn.includes(key) ? "&nbsp;" : key}</div>
                 </th>
             )
 
@@ -48,7 +63,7 @@ export default function SimpTable(props) {
                 {Object.keys(props.data).map((key, i) => {
                     return (
                         <th className={`${props.titleContainerClass}`} style={{'flex' : props.flex[i]}}>
-                            <div className={props.titleDisplayClass}>{key}</div>
+                            {props.hidecolumn.includes(key) ? <div className={props.titleDisplayClass}>&nbsp;&nbsp;&nbsp;</div> : <div className={props.titleDisplayClass}>{key}</div>}
                         </th>
                     )
                 })}
@@ -63,8 +78,8 @@ export default function SimpTable(props) {
                     {Object.keys(props.data).map((key, i) => {
                         return (
                             <td className={`${props.inputContainerClass}`} style={{'flex' : props.flex[i]}}>
-                                <div onClick={event => handleClick(`${key}-${j}`)} className={`${props.inputDisplayClass}`}>
-                                    <TextArea id={`${key}-${j}`} className={`${props.inputClass}`} value={props.data[key][j]} />
+                                <div onClick={event => handleClick(event, `${key}-${j}`)} className={`${props.inputDisplayClass}`}>
+                                    {handleElement(key, j)}
                                 </div>
                             </td>
                         )
@@ -94,21 +109,55 @@ export default function SimpTable(props) {
     }
 
     const displayTable = () => {
-        if (props.data !== 'undefined') {
-            return (
-                <>
-                    <table className={props.tableClass}>
-                        <tbody>
-                            {calculateInfo()}
-                        </tbody>
-                    </table>
-                    <div className={`${props.buttonContainerClass}`}>
-                        <button className={`${props.buttonClass}`}>Add</button>
-                    </div>
-                </>
-                
-            )
-        }
+        if (typeof props.data !== 'undefined') {
+            if (Object.keys(props.data).length > 0) {
+                return (
+                    <>
+                        <table className={props.tableClass}>
+                            <tbody>
+                                {calculateInfo()}
+                            </tbody>
+                        </table>
+                        <div className={`${props.buttonContainerClass}`}>
+                            <button className={`${props.buttonClass}`} onClick={props.onClick}>Add</button>
+                        </div>
+                    </>
+                )
+            }
+            
+        } 
+        const p = ['tableClass={\'\'}',
+                    'rowClass={\'\'}',
+                    'titleContainerClass={\'\'}',
+                    'titleDisplayClass={\'\'}',
+                    '',
+                    'inputContainerClass={\'\'}',
+                    'inputDisplayClass={\'\'}',
+                    'inputClass={\'\'}',
+                    'buttonContainerClass={\'\'}',
+                    'buttonClass={\'\'}',
+                    '',
+                    'data={{}}',
+                    'hidecolumn={[]}',
+                    'customElements={}',
+                    'customArgs={}',
+                    'groupedCustomElements={}',
+                    '',
+                    'flexdirection={\'\'}',
+                    'flex={[]}',
+                    '',
+                    'onChange={event => console.log(event.target.value)}',
+                    'onClick={event => console.log(\'Add\')}']
+
+        return <p>{p.map(line => {
+            if (line === '') {
+                return <p>&nbsp;</p>
+            } else {
+                return <p>{line}</p>
+            }
+        })}</p>
+
+
     }
 
     return displayTable()
