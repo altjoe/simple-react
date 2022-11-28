@@ -1,7 +1,7 @@
 {
-  "name": "react-library",
+  "name": "@altjoe/simple-react",
   "version": "0.0.1",
-  "description": "First beta release of simple table",
+  "description": "First working release of simple table",
   "scripts": {
     "rollup": "rollup -c --bundleConfigAsCjs",
     "test": "jest",
@@ -37,7 +37,12 @@
     "rollup": "^3.2.5",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-postcss": "^4.0.2",
-    "tailwindcss": "^3.2.2"
+    "tailwindcss": "^3.2.2",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/jest": "^0.0.10",
+    "react-datepicker": "^4.8.0",
+    "react-expanding-textarea": "^2.3.6",
+    "react-height": "^3.0.2"
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -48,10 +53,6 @@
     "registry": "https://npm.pkg.github.com/altjoe"
   },
   "dependencies": {
-    "@storybook/addon-postcss": "^2.0.0",
-    "@storybook/jest": "^0.0.10",
-    "react-datepicker": "^4.8.0",
-    "react-expanding-textarea": "^2.3.6",
-    "react-height": "^3.0.2"
+    
   }
 }
