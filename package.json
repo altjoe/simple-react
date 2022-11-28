@@ -1,7 +1,7 @@
 {
   "name": "react-library",
   "version": "0.0.1",
-  "description": "",
+  "description": "First beta release of simple table",
   "scripts": {
     "rollup": "rollup -c --bundleConfigAsCjs",
     "test": "jest",
@@ -49,6 +49,9 @@
   },
   "dependencies": {
     "@storybook/addon-postcss": "^2.0.0",
-    "react-expanding-textarea": "^2.3.6"
+    "@storybook/jest": "^0.0.10",
+    "react-datepicker": "^4.8.0",
+    "react-expanding-textarea": "^2.3.6",
+    "react-height": "^3.0.2"
   }
 }
