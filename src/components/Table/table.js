@@ -186,20 +186,20 @@ export default function SimpTable(props) {
 
         return (
             <div className={`flex justify-evenly`}>
-                <p>{component_params.map(line => {
+                <div>{component_params.map(line => {
                     if (line === '') {
                         return <p>&nbsp;</p>
                     } else {
                         return <p>{line}</p>
                     }
-                })}</p>
-                <p>{component_params_object.map(line => {
+                })}</div>
+                <div>{component_params_object.map(line => {
                     if (line === '') {
                         return <p>&nbsp;</p>
                     } else {
                         return <p>{line}</p>
                     }
-                })}</p>
+                })}</div>
             </div>
         )
 
