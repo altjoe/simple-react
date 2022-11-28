@@ -1,2 +1,1 @@
-export { default as SimpleTable } from './SimpTable'
-export { default as Form } from './Form'
+export { default as Table } from './Table'
