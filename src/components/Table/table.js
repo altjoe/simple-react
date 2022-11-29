@@ -105,10 +105,10 @@ export default function SimpTable(props) {
             const rowClassAddition = props.highlightRows[j] ? props.highlightClass : ''
             console.log(rowClassAddition);
             return (
-                <tr className={props.rowClass + ' ' + rowClassAddition} >
+                <tr className={props.rowClass} >
                     {Object.keys(props.data).map((key, i) => {
                         return (
-                            <td onClick={event => handleClick(event, `${key}-${j}`)}  className={`${props.inputContainerClass}`} style={{'width' : widthPercentage[i]}}>
+                            <td onClick={event => handleClick(event, `${key}-${j}`)}  className={props.inputContainerClass + ' ' + rowClassAddition} style={{'width' : widthPercentage[i]}}>
                                 {handleElement(key, j)}
                             </td>
                         )

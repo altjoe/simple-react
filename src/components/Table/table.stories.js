@@ -101,8 +101,8 @@ Vertical.args = {
     flexdirection : 'column',
     flex : [9, 3, 3, 3, 0.3, 0.3, 0.3],
 
-    highlightRows : [true, false, false, false],
-    highlightClass : 'bg-orange-300',
+    highlightRows : [true, false, true, false],
+    highlightClass : 'bg-orange-300 first:rounded-l-lg last:rounded-r-lg',
 
     onChange : event => console.log(event.target.value),
     onClick : event => console.log('Add')
