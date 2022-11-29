@@ -20,7 +20,7 @@ export default function Dropdown(props) {
                     {props.options.map(option => {
                         const handleOptionClick = typeof props.optionClicked[option] !== 'undefined' ? props.optionClicked[option] : event => console.log(event);
                         return (
-                            <div className={`${props.optionContainerClass}`} onclick={handleOptionClick}>
+                            <div className={`${props.optionContainerClass}`}>
                                 <div id='option' className={`${props.optionLabelClass}`} onClick={event => {handleOptionClick(event); handleBlur()}}>{option}</div>
                             </div>
                         )

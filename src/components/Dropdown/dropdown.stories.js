@@ -25,7 +25,7 @@ Simple.args = {
 
     options : ['Embroidery', 'Screen Print', 'Transfer'],
     optionClicked : {
-        'Embroidery' : event => console.log('Embroidery'),
+        'Embroidery' : event => alert('test'),
         'Screen Print' : event => console.log('Screen Print'),
         'Transfer' : event => console.log('Transfer')
     }
