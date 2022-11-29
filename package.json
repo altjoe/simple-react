@@ -1,6 +1,6 @@
 {
   "name": "@altjoe/simple-react",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "First working release of simple table",
   "scripts": {
     "rollup": "rollup -c --bundleConfigAsCjs",
@@ -41,7 +41,6 @@
     "@storybook/addon-postcss": "^2.0.0",
     "@storybook/jest": "^0.0.10",
     "react-datepicker": "^4.8.0",
-    "react-expanding-textarea": "^2.3.6",
     "react-height": "^3.0.2"
   },
   "main": "dist/cjs/index.js",
@@ -53,6 +52,6 @@
     "registry": "https://npm.pkg.github.com/altjoe"
   },
   "dependencies": {
-    
+    "react-expanding-textarea": "^2.3.6"
   }
 }

@@ -4,6 +4,7 @@ import TextArea from 'react-expanding-textarea'
 
 export default function SimpTable(props) {
 
+
     let widthPercentage = 'undefined'
     if (typeof props.flex != 'undefined') {
         widthPercentage = props.flex.map(val => {
@@ -15,20 +16,21 @@ export default function SimpTable(props) {
 
     const handleClick = (event, id) => {
         const element = document.getElementById(id)
-        if (typeof element !== 'undefined' && event.target.id !== id) {
+        if (typeof element !== 'undefined' && event.target.id !== id && element !== null) {
             element.focus()
-            console.log(element);
-            element.setSelectionRange(element.value.length, element.value.length)
+            if (element.type !== 'date') {
+                element.setSelectionRange(element.value.length, element.value.length)
+            }
+            
         }
     }
 
     const handleElement = (key, j) => {
         if (typeof props.customElements !== 'undefined' && Object.keys(props.customElements).includes(key)) {
             const Element = props.customElements[key]
-            console.log(`${key}-${j}`);
             return (
                 <div onClick={event => handleClick(event, `${key}-${j}`)} className={props.inputDisplayClass}>
-                    <Element id={`${key}-${j}`} {...props.customArgs} value={props.data[key][j]}/>
+                    <Element id={`${key}-${j}`} {...props.customArgs} value={props.data[key][j]} onChange={event => props.onChange(event, key, j)}/>
                 </div>
             )
         } 
@@ -39,7 +41,7 @@ export default function SimpTable(props) {
         
         return (
             <div onClick={event => handleClick(event, `${key}-${j}`)} className={props.inputDisplayClass}>
-                <TextArea id={`${key}-${j}`} className={props.inputClass} value={props.data[key][j]} onChange={props.onChange}/>
+                <TextArea id={`${key}-${j}`} className={props.inputClass} value={props.data[key][j]} onChange={event => props.onChange(event, key, j)}/>
             </div>
         )
         
