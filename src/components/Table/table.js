@@ -30,18 +30,24 @@ export default function SimpTable(props) {
             const Element = props.customElements[key]
             return (
                 <div onClick={event => handleClick(event, `${key}-${j}`)} className={props.inputDisplayClass}>
-                    <Element id={`${key}-${j}`} {...props.customArgs} value={props.data[key][j]} onChange={event => props.onChange(event, key, j)}/>
+                    <Element id={`${key}-${j}`} {...props.customArgs} value={props.data[key][j]} onChange={event => props.onChange(event, key, j)} disabled={!props.editable}/>
                 </div>
             )
         } 
         
         if (typeof props.groupedCustomElements !== 'undefined' && Object.keys(props.groupedCustomElements).includes(key)) {
-            return props.groupedCustomElements[key]
+            return (
+                <div className={`${props.customContainerClass}`}>
+                    {props.groupedCustomElements[key]}
+                </div>
+            )
         }
         
         return (
             <div onClick={event => handleClick(event, `${key}-${j}`)} className={props.inputDisplayClass}>
-                <TextArea id={`${key}-${j}`} className={props.inputClass} value={props.data[key][j]} onChange={event => props.onChange(event, key, j)}/>
+                {
+                    <TextArea id={`${key}-${j}`} className={props.inputClass} value={props.data[key][j]} onChange={event => props.onChange(event, key, j)} disabled={!props.editable}/>
+                }
             </div>
         )
         
@@ -65,7 +71,7 @@ export default function SimpTable(props) {
             )
 
             return (
-                <tr className={`${props.rowClass} row`}>
+                <tr className={props.rowClass}>
                     {row}
                 </tr>
             )})
@@ -95,8 +101,11 @@ export default function SimpTable(props) {
 
     const calculateColumnBody = () => {
         return props.data[Object.keys(props.data)[0]].map((_, j) => {
+            console.log(props.highlightRows[j]);
+            const rowClassAddition = props.highlightRows[j] ? props.highlightClass : ''
+            console.log(rowClassAddition);
             return (
-                <tr className={`${props.rowClass}`}>
+                <tr className={props.rowClass + ' ' + rowClassAddition} >
                     {Object.keys(props.data).map((key, i) => {
                         return (
                             <td onClick={event => handleClick(event, `${key}-${j}`)}  className={`${props.inputContainerClass}`} style={{'width' : widthPercentage[i]}}>
@@ -160,6 +169,9 @@ export default function SimpTable(props) {
                     '',
                     'flexdirection={\'\'}',
                     'flex={[]}',
+                    'editable={true}',
+                    'highlightRow={[]}',
+                    'highlightClass={\'\'}',
                     '',
                     'onChange={event => console.log(event.target.value)}',
                     'onClick={event => console.log(\'Add\')}']
@@ -182,6 +194,9 @@ export default function SimpTable(props) {
                     '',
                     'flexdirection : \'\',',
                     'flex : [],',
+                    'editable : true,',
+                    'highlightRows : [],',
+                    'highlightClass : \'\',',
                     '',
                     'onChange : event => console.log(event.target.value),',
                     'onClick : event => console.log(\'Add\')']
@@ -229,6 +244,9 @@ SimpTable.defaultProps = {
 
     flexdirection: '',
     flex : [],
+    editable : true,
+    highlightRows : [],
+    highlightClass : '',
 
     onChange : event => console.log(event.target.value),
     onClick : event => console.log('Add')

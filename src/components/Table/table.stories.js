@@ -63,7 +63,7 @@ Vertical.args = {
 
     inputContainerClass : 'group  h-full  table-cell',
     inputDisplayClass : tw('flex w-full h-full text-center group-hover:bg-red-200 rounded-lg'),
-    inputClass : 'self-center w-full resize-none text-center bg-transparent',
+    inputClass : 'self-center w-full resize-none text-center bg-transparent text-lg font-semibold',
 
     buttonContainerClass : '',
     buttonClass : '',
@@ -86,7 +86,7 @@ Vertical.args = {
     customElements : {'Date' : 'input'},
     customArgs : {
       type : 'date',
-      className : 'bg-transparent outline-none text-center pl-4 m-auto',
+      className : 'bg-transparent outline-none text-center pl-4 m-auto font-semibold',
       onChange : event => console.log(event.target.value)
     },
     hidecolumn : ['Edit', 'Completed', 'Remove'],
@@ -100,6 +100,9 @@ Vertical.args = {
 
     flexdirection : 'column',
     flex : [9, 3, 3, 3, 0.3, 0.3, 0.3],
+
+    highlightRows : [true, false, false, false],
+    highlightClass : 'bg-orange-300',
 
     onChange : event => console.log(event.target.value),
     onClick : event => console.log('Add')
