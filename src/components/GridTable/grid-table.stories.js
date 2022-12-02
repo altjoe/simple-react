@@ -16,9 +16,9 @@ export default {
 
 const Template = (args) => {
     const [data1, setData1] = useState({
-        'Name' : ['a', '1', 'e'],
-        'Date' : ['b', '2', 'f'],
-        'Email' : ['c', '3', 'g'],
+        'Name' : ['a', 'b', 'c'],
+        'Date' : ['1', '2', '3'],
+        'Email' : ['c', 'd', 'f'],
         'Rushed' : [false, false, false]
     })
     const [data2, setData2] = useState([
@@ -44,114 +44,70 @@ const Template = (args) => {
         setData2(temp)
     }
 
-    return <GridTable onChange={handleChange2} data={data2} {...args} />
+    return (
+        <div>
+            <GridTable tableID='1' onChange={handleChange1} data={data1} {...args} />
+            <div className={`p-5`}></div>
+            <GridTable tableID='2' onChange={handleChange2} data={data2} {...args} />
+        </div>
+    )
 };
 
-export const Horizontal_Data1 = Template.bind({});
 
 
+export const Horizontal = Template.bind({});
 
-Horizontal_Data1.args = {
-    // const [data1, setData1] = useState({
-    //     'Name' : ['a', '1', 'e'],
-    //     'Date' : ['b', '2', 'f'],
-    //     'Email' : ['c', '3', 'g']
-    // })
-    tableClass : 'grid rounded-xl overflow-scroll',
-    headerContainer : tw('sticky left-0 bg-red-300 min-w-[100px]', 
-                         'flex'),
-    header : tw('p-2 flex-1 self-center text-center '),
+Horizontal.args = {
+    tableClass : 'grid rounded-xl overflow-hidden',
+    rowClass : ['bg-yellow-300', 'bg-green-200', 'bg-green-200'],
+    headerContainer : tw(' bg-red-300', 
+                         'flex flex-1'),
+    header : tw('p-2 flex-1 self-center text-center'),
 
     inputContainer : tw(' flex w-full',
-                        'border-b border-slate-500 hover:bg-slate-300'),
-    inputDisplay : tw('flex flex-1 bg-transparent'),
+                        'border-b '),
+    inputDisplay : tw('flex flex-1 bg-transparent rounded-xl border-slate-500 hover:bg-slate-300'),
     input : tw('p-2 resize-none bg-transparent text-center flex-1 self-center outline-none'),
 
     elements : {
-        'Name' : (args) => <TextArea {...args}/>,
-        'Date' : (args) => <input type='date' {...args}/>,
-        'Email' : (args) => <TextArea {...args}/>
-    },
-
-    rowClass : ['', '', 'bg-yellow-300'],
-    colClass : [],
-
-    colWidths : [1, 1, 1, 1],
-    direction : 'row'
-}
-
-export const Vertical_Data1 = Template.bind({});
-
-
-
-
-Vertical_Data1.args = {
-    tableClass : 'grid rounded-xl overflow-hidden',
-    headerContainer : tw(' bg-red-300', 
-                         'flex flex-1'),
-    header : tw('p-2 flex-1 self-center text-center'),
-
-    inputContainer : tw('flex w-full',
-                        'border-b border-slate-500 hover:bg-slate-300'),
-    inputDisplay : tw('flex flex-1 bg-transparent'),
-    input : tw('p-2 resize-none bg-transparent text-center flex-1 self-center outline-none'),
-
-    elements : {
-        'Name' : (args) => <TextArea {...args}/>,
-        'Date' : (args) => <input type='date' {...args}/>,
-        'Email' : (args) => <TextArea {...args}/>,
+        // 'Name' : (args) => <TextArea {...args}/>,
+        // 'Date' : (args) => <input type='date' {...args}/>,
+        // // 'Email' : (args) => <TextArea {...args}/>,
         'Rushed' : (args) => <input type='radio' {...args}/>
     },
-    colWidths : [1, 1, 1, 1],
-    direction : 'column'
-}
-
-
-export const Horizontal_Data2 = Template.bind({});
-
-
-
-Horizontal_Data2.args = {
-    // const [data1, setData1] = useState({
-    //     'Name' : ['a', '1', 'e'],
-    //     'Date' : ['b', '2', 'f'],
-    //     'Email' : ['c', '3', 'g']
-    // })
-    tableClass : 'grid rounded-xl overflow-hidden',
-    headerContainer : tw(' bg-red-300', 
-                         'flex flex-1'),
-    header : tw('p-2 flex-1 self-center text-center'),
-
-    inputContainer : tw('flex w-full',
-                        'border-b border-slate-500 hover:bg-slate-300'),
-    inputDisplay : tw('flex flex-1 bg-transparent'),
-    input : tw('p-2 resize-none bg-transparent text-center flex-1 self-center outline-none'),
-
-    elements : {
-        'Name' : (args) => <TextArea {...args}/>,
-        'Date' : (args) => <input type='date' {...args}/>,
-        'Email' : (args) => <TextArea {...args}/>,
-        'Rushed' : (args) => <input type='radio' {...args}/>
+    handleElement : {
+        // 'Name' : {'onChange' : event => console.log(event.target.value)},
+        // 'Date' : {'onChange' : event => console.log(event.target.value)},
+        // // 'Email' : {'onChange' : event => console.log(event.target.value)},
+        'Rushed' : {'onClick' : event => console.log(event.target.value)},
+    },
+    elementParentFunction : {
+        // 'Name' : (doc, id) => doc.getElementById(id).focus(),
+        // 'Date' : (doc, id) => doc.getElementById(id).focus(),
+        // // 'Email' : (doc, id) => doc.getElementById(id).focus(),
+        'Rushed' : (doc, id) => doc.getElementById(id).click()
+        
     },
 
     colWidths : [1, 1, 1, 1],
     direction : 'row'
 }
 
-export const Vertical_Data2 = Template.bind({});
+export const Vertical = Template.bind({});
 
 
 
 
-Vertical_Data2.args = {
+Vertical.args = {
     tableClass : 'grid rounded-xl overflow-hidden',
+    rowClass : ['bg-yellow-300', 'bg-green-200', 'bg-green-200'],
     headerContainer : tw(' bg-red-300', 
                          'flex flex-1'),
     header : tw('p-2 flex-1 self-center text-center'),
 
-    inputContainer : tw('flex w-full',
-                        'border-b border-slate-500 hover:bg-slate-300'),
-    inputDisplay : tw('flex flex-1 bg-transparent'),
+    inputContainer : tw(' flex w-full',
+                        'border-b '),
+    inputDisplay : tw('flex flex-1 bg-transparent rounded-xl border-slate-500 hover:bg-slate-300'),
     input : tw('p-2 resize-none bg-transparent text-center flex-1 self-center outline-none'),
 
     elements : {
@@ -159,6 +115,19 @@ Vertical_Data2.args = {
         'Date' : (args) => <input type='date' {...args}/>,
         'Email' : (args) => <TextArea {...args}/>,
         'Rushed' : (args) => <input type='radio' {...args}/>
+    },
+    handleElement : {
+        'Name' : {'onChange' : event => console.log(event.target.value)},
+        'Date' : {'onChange' : event => console.log(event.target.value)},
+        'Email' : {'onChange' : event => console.log(event.target.value)},
+        'Rushed' : {'onClick' : event => console.log(event.target.value)},
+    },
+    elementParentFunction : {
+        'Name' : (doc, id) => doc.getElementById(id).focus(),
+        'Date' : (doc, id) => doc.getElementById(id).focus(),
+        'Email' : (doc, id) => doc.getElementById(id).focus(),
+        'Rushed' : (doc, id) => doc.getElementById(id).click()
+        
     },
     colWidths : [1, 1, 1, 0.1],
     direction : 'column'

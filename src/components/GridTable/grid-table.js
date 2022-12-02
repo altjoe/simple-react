@@ -4,20 +4,25 @@ import PropTypes from 'prop-types'
 export default function GridTable(props) {
 
     const handleElement = (key, index, val) => {
-        if (typeof props.elements !== 'undefined') {
+        let rowClass = props.rowClass[index]
+
+        if (typeof props.elements !== 'undefined' && Object.keys(props.elements).includes(key)) {
             let Element = props.elements[key]
+            console.log(`${props.tableID}-${key}-${index}`);
             return (
-                <div className={`${props.inputContainer}`}>
-                    <div className={`${props.inputDisplay}`}> 
-                        <Element className={typeof Element !== 'undefined' ? Element.className + props.input : props.input} onChange={event => props.onChange(event, key, index)} value={val}/>
+                <div key={`input-container-${props.tableID}-${key}-${index}`} className={`${props.inputContainer} ${rowClass}`}>
+                    <div  key={`input-display-${props.tableID}-${key}-${index}`} className={`${props.inputDisplay}`} onClick={event => props.elementParentFunction[key](document, `input-${props.tableID}-${key}-${index}`)}> 
+                        <Element  key={`input-${props.tableID}-${key}-${index}`} id={`input-${props.tableID}-${key}-${index}`} className={typeof Element !== 'undefined' ? Element.className + ' ' + props.input : props.input} value={val} {...props.handleElement[key]}/>
                     </div>
                 </div>
             )
         } else {
             return (
-                <div className={`${props.inputContainer}`}>
-                    <div className={`${props.inputDisplay}`}>
-                        {val}
+                <div key={`input-container-${props.tableID}-${key}-${index}`} className={`${props.inputContainer} ${rowClass}`}>
+                    <div  key={`input-display-${props.tableID}-${key}-${index}`} className={`${props.inputDisplay}`}> 
+                        <div key={`input-${props.tableID}-${key}-${index}`} className={`${props.input}`}>
+                            {val}
+                        </div>
                     </div>
                 </div>
             )
