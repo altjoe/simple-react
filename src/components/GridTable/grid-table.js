@@ -4,7 +4,10 @@ import PropTypes from 'prop-types'
 export default function GridTable(props) {
 
     const handleElement = (key, index, val) => {
-        let rowClass = props.rowClass[index]
+        let rowClass = typeof props.rowClass !== 'undefined' ?
+                            props.rowClass.length > index ?
+                                props.rowClass[index] : ''
+                            : ''
 
         if (typeof props.elements !== 'undefined' && Object.keys(props.elements).includes(key)) {
             const parentOnClick = typeof props.elementParentFunction !== 'undefined' ? 

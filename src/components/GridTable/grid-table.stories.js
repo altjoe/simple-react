@@ -70,25 +70,20 @@ Horizontal.args = {
     input : tw('p-2 resize-none bg-transparent text-center flex-1 self-center outline-none'),
 
     elements : {
-        'Name' : (key, id, val, cl) => {
-          return <TextArea key={key} id={id} value={val} className={cl}/>
+        'Name' : (tableid, key, id, val, cl) => {
+          return <TextArea key={key} id={``} value={val} className={cl}/>
         },
-        'Date' : (key, id, val, cl) => {
-          return <TextArea key={key} id={id} value={val} className={cl}/>
+        'Date' : (tableid, key, id, val, cl) => {
+          return <TextArea key={key} id={``} value={val} className={cl}/>
         },
-        'Email' : (key, id, val, cl) => {
-          return <TextArea key={key} id={id} value={val} className={cl}/>
+        'Email' : (tableid, key, id, val, cl) => {
+          return <TextArea key={key} id={``} value={val} className={cl}/>
         },
-        'Rushed' : (key, id, val, cl) => {
-          return <input key={key} id={id} checked={val} className={`${cl}`}/>
+        'Rushed' : (tableid, key, id, val, cl) => {
+          return <input type='checkmark' key={key} id={``} checked={val} className={`${cl}`}/>
         }
     },
-    handleElement : {
-        // 'Name' : {'onChange' : event => console.log(event.target.value)},
-        // 'Date' : {'onChange' : event => console.log(event.target.value)},
-        // // 'Email' : {'onChange' : event => console.log(event.target.value)},
-        'Rushed' : {'onClick' : event => console.log(event.target.value)},
-    },
+
     elementParentFunction : {
         // 'Name' : (doc, id) => doc.getElementById(id).focus(),
         // 'Date' : (doc, id) => doc.getElementById(id).focus(),
