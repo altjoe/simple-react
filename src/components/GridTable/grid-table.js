@@ -7,11 +7,17 @@ export default function GridTable(props) {
         let rowClass = props.rowClass[index]
 
         if (typeof props.elements !== 'undefined' && Object.keys(props.elements).includes(key)) {
-            const parentOnClick = typeof props.elementParentFunction !== 'undefined' ? Object.keys(props.elementParentFunction).includes(key) ?  event => props.elementParentFunction[key](document, `input-${props.tableID}-${key}-${index}`) : event => '' : event => ''
+            const parentOnClick = typeof props.elementParentFunction !== 'undefined' ? 
+                                        Object.keys(props.elementParentFunction).includes(key) ?  
+                                            event => props.elementParentFunction[key](document, props.tableID, key, index) : 
+                                            event => console.log('here1') : 
+                                        event => console.log('here2')
             return (
                 <div key={`input-container-${props.tableID}-${key}-${index}`} className={`${props.inputContainer} ${rowClass}`}>
-                    <div  key={`input-display-${props.tableID}-${key}-${index}`} className={`${props.inputDisplay}`} onClick={parentOnClick}> 
-                        {props.elements[key](key, index, val, props.input)}
+                    <div  key={`input-display-${props.tableID}-${key}-${index}`} 
+                          className={`${props.inputDisplay}`} 
+                          onClick={event => parentOnClick}> 
+                        {props.elements[key](props.tableID, key, index, val, props.input)}
                     </div>
                 </div>
             )
