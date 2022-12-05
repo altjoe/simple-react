@@ -7,12 +7,11 @@ export default function GridTable(props) {
         let rowClass = props.rowClass[index]
 
         if (typeof props.elements !== 'undefined' && Object.keys(props.elements).includes(key)) {
-            let Element = props.elements[key]
-            console.log(`${props.tableID}-${key}-${index}`);
+            const parentOnClick = typeof props.elementParentFunction !== 'undefined' ? Object.keys(props.elementParentFunction).includes(key) ?  event => props.elementParentFunction[key](document, `input-${props.tableID}-${key}-${index}`) : event => '' : event => ''
             return (
                 <div key={`input-container-${props.tableID}-${key}-${index}`} className={`${props.inputContainer} ${rowClass}`}>
-                    <div  key={`input-display-${props.tableID}-${key}-${index}`} className={`${props.inputDisplay}`} onClick={event => props.elementParentFunction[key](document, `input-${props.tableID}-${key}-${index}`)}> 
-                        <Element  key={`input-${props.tableID}-${key}-${index}`} id={`input-${props.tableID}-${key}-${index}`} className={typeof Element !== 'undefined' ? Element.className + ' ' + props.input : props.input} value={val} {...props.handleElement[key]}/>
+                    <div  key={`input-display-${props.tableID}-${key}-${index}`} className={`${props.inputDisplay}`} onClick={parentOnClick}> 
+                        {props.elements[key](key, index, val, props.input)}
                     </div>
                 </div>
             )
@@ -20,7 +19,7 @@ export default function GridTable(props) {
             return (
                 <div key={`input-container-${props.tableID}-${key}-${index}`} className={`${props.inputContainer} ${rowClass}`}>
                     <div  key={`input-display-${props.tableID}-${key}-${index}`} className={`${props.inputDisplay}`}> 
-                        <div key={`input-${props.tableID}-${key}-${index}`} className={`${props.input}`}>
+                        <div key={`input`} className={`${props.input}`}>
                             {val}
                         </div>
                     </div>
@@ -105,6 +104,7 @@ export default function GridTable(props) {
         } 
         else {
             console.log(typeof props.data);
+
             return <p>No props passed - data is required</p>
         }
     }

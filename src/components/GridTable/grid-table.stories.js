@@ -46,9 +46,9 @@ const Template = (args) => {
 
     return (
         <div>
-            <GridTable tableID='1' onChange={handleChange1} data={data1} {...args} />
+            <GridTable tableID='1' data={data1} {...args} />
             <div className={`p-5`}></div>
-            <GridTable tableID='2' onChange={handleChange2} data={data2} {...args} />
+            <GridTable tableID='2' data={data2} {...args} />
         </div>
     )
 };
@@ -70,10 +70,18 @@ Horizontal.args = {
     input : tw('p-2 resize-none bg-transparent text-center flex-1 self-center outline-none'),
 
     elements : {
-        // 'Name' : (args) => <TextArea {...args}/>,
-        // 'Date' : (args) => <input type='date' {...args}/>,
-        // // 'Email' : (args) => <TextArea {...args}/>,
-        'Rushed' : (args) => <input type='radio' {...args}/>
+        'Name' : (key, id, val, cl) => {
+          return <TextArea key={key} id={id} value={val} className={cl}/>
+        },
+        'Date' : (key, id, val, cl) => {
+          return <TextArea key={key} id={id} value={val} className={cl}/>
+        },
+        'Email' : (key, id, val, cl) => {
+          return <TextArea key={key} id={id} value={val} className={cl}/>
+        },
+        'Rushed' : (key, id, val, cl) => {
+          return <input key={key} id={id} checked={val} className={`${cl}`}/>
+        }
     },
     handleElement : {
         // 'Name' : {'onChange' : event => console.log(event.target.value)},
