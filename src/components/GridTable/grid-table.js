@@ -28,15 +28,15 @@ export default function GridTable(props) {
         let rowClass = typeof props.rowClass !== 'undefined' ? props.rowClass.length > index ? props.rowClass[index] : '' : ''
         // console.log(rowClass, index, props.rowClass.includes(index));
         if (typeof props.elements !== 'undefined' && Object.keys(props.elements).includes(key)) {
-            const parentOnClick = typeof props.elementParentFunction !== 'undefined' ? Object.keys(props.elementParentFunction).includes(key) ?  event => props.elementParentFunction[key](props.tableID, key, index) : event => '' : event => ''
+            // const parentOnClick = typeof props.elementParentFunction !== 'undefined' ? Object.keys(props.elementParentFunction).includes(key) ?  event => props.elementParentFunction[key](props.tableID, key, index) : event => '' : event => ''
             return (
-                <div key={`input-container-${props.tableID}-${key}-${index}`} className={`${props.inputContainer} ${rowClass}`}>
-                    <div  key={`input-display-${props.tableID}-${key}-${index}`} 
-                          className={`${props.inputDisplay}`} 
-                          onClick={event => parentOnClick(event)}> 
-                        {props.elements[key](props.tableID, key, index, val, props.input)}
-                    </div>
-                </div>
+                // <div key={`input-container-${props.tableID}-${key}-${index}`} className={`${props.inputContainer} ${rowClass}`}>
+                //     <div  key={`input-display-${props.tableID}-${key}-${index}`} 
+                //           className={`${props.inputDisplay}`} 
+                //           onClick={event => parentOnClick(event)}> 
+                props.elements[key](props.tableID, key, index, val, props.input, props.inputDisplay, [props.inputContainer, rowClass].join(' '))
+                //     </div>
+                // </div>
             )
         } else {
             return (
