@@ -3,9 +3,30 @@ import PropTypes from 'prop-types'
 
 export default function GridTable(props) {
 
-    const handleElement = (key, index, val) => {
-        let rowClass = typeof props.rowClass !== 'undefined' ? props.rowClass.includes(index) ? props.rowClass[index] : '' : ''
+    //props to add
+    //headerRow
+    //headerElement
+    const handleHeader = (key, headerContainer, header) => {  
+        // console.log(Object.keys(props.headerElements).includes(key), Object.keys(props.headerElements), key);
+        if (typeof props.headerElements !== 'undefined' && Object.keys(props.headerElements).includes(key)) {
+            return (
+                props.headerElements[key](key, headerContainer, header)
+            )
+        }
+         else {
+            return (
+                <div className={`${headerContainer}`}>
+                    <div className={`${header}`}>
+                        {key}
+                    </div>      
+                </div>
+            )
+        }
+    }
 
+    const handleElement = (key, index, val) => {
+        let rowClass = typeof props.rowClass !== 'undefined' ? props.rowClass.length > index ? props.rowClass[index] : '' : ''
+        // console.log(rowClass, index, props.rowClass.includes(index));
         if (typeof props.elements !== 'undefined' && Object.keys(props.elements).includes(key)) {
             const parentOnClick = typeof props.elementParentFunction !== 'undefined' ? Object.keys(props.elementParentFunction).includes(key) ?  event => props.elementParentFunction[key](props.tableID, key, index) : event => '' : event => ''
             return (
@@ -37,11 +58,12 @@ export default function GridTable(props) {
                 if (props.direction === 'row') {
                     Object.keys(props.data).map(key => {
                         cells.push(
-                            <div className={`${props.headerContainer}`}>
-                                <div className={`${props.header}`}>
-                                    {key}
-                                </div>
-                            </div>
+                            // <div className={`${props.headerContainer}`}>
+                            //     <div className={`${props.header}`}>
+                            //         {key}
+                            //     </div>
+                            // </div>
+                            handleHeader(key, props.headerContainer, props.header)
                         )
                         props.data[key].map((val, i) => {
                             cells.push(handleElement(key, i, val))
@@ -50,11 +72,12 @@ export default function GridTable(props) {
                 } else {
                     Object.keys(props.data).map(key => {
                         cells.push(
-                            <div className={`${props.headerContainer}`}>
-                                <div className={`${props.header}`}>
-                                    {key}
-                                </div>
-                            </div>
+                            // <div className={`${props.headerContainer}`}>
+                            //     <div className={`${props.header}`}>
+                            //         {key}
+                            //     </div>
+                            // </div>
+                            handleHeader(key, props.headerContainer, props.header)
                         )
                     })
                     props.data[Object.keys(props.data)[0]].map((_, i) => {
@@ -70,11 +93,12 @@ export default function GridTable(props) {
                     let cells = []
                     Object.keys(props.data[0]).map(key => {
                         cells.push(
-                            <div className={`${props.headerContainer}`}>
-                                <div className={`${props.header}`}>
-                                    {key}
-                                </div>
-                            </div>
+                            // <div className={`${props.headerContainer}`}>
+                            //     <div className={`${props.header}`}>
+                            //         {key}
+                            //     </div>
+                            // </div>
+                            handleHeader(key, props.headerContainer, props.header)
                         )
                     })
                     Object.keys(props.data).map(row => {
@@ -88,11 +112,14 @@ export default function GridTable(props) {
                     let cells = []   
                     Object.keys(props.data[0]).map((key, i) => {
                         cells.push(
-                            <div className={`${props.headerContainer}`}>
-                                <div className={`${props.header}`}>
-                                    {key}
-                                </div>
-                            </div>
+                            // <div className={`${props.headerContainer}`}>
+                            //     <div className={`${props.header}`}>
+                            //         {key}
+                            //     </div>
+                                
+                            // </div>
+                            handleHeader(key, props.headerContainer, props.header)
+                            
                         )
                         
                         Object.keys(props.data).map(row => {
@@ -122,10 +149,9 @@ export default function GridTable(props) {
             }
         }
     }
-    console.log(handleGridTemplateColumns());
     return (
         
-        <div className={`${props.tableClass}`} style={{'grid-template-columns' : handleGridTemplateColumns()}}>
+        <div className={`${props.tableClass}`} style={{'gridTemplateColumns' : handleGridTemplateColumns()}}>
             {handleData()}
         </div>
     )
