@@ -85,7 +85,7 @@ export default function GridTable(props) {
 
                     return cells
                 } else {
-                    let cells = []
+                    let cells = []   
                     Object.keys(props.data[0]).map((key, i) => {
                         cells.push(
                             <div className={`${props.headerContainer}`}>
@@ -122,6 +122,7 @@ export default function GridTable(props) {
             }
         }
     }
+    console.log(handleGridTemplateColumns());
     return (
         
         <div className={`${props.tableClass}`} style={{'grid-template-columns' : handleGridTemplateColumns()}}>
