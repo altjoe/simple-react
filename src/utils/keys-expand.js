@@ -3,7 +3,7 @@ const keysExpand = (keys, value) => {
     keys.forEach(key => {
         expandedObject[key] = value
     })
-    console.log('expanded', expandedObject);
+    // console.log('expanded', expandedObject);
     return expandedObject
 }
 
