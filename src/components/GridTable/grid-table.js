@@ -6,18 +6,22 @@ export default function GridTable(props) {
     //props to add
     //headerRow
     //headerElement
-    const handleHeader = (key, headerContainer, header) => {  
+    const handleHeader = (key, headerContainer, headerDisplay, header) => {  
         // console.log(Object.keys(props.headerElements).includes(key), Object.keys(props.headerElements), key);
         if (typeof props.headerElements !== 'undefined' && Object.keys(props.headerElements).includes(key)) {
             return (
-                props.headerElements[key](key, headerContainer, header)
+                // props.headerElements[key](key, headerContainer, header)
+                ///props.tableID, key, index, val, props.input, props.inputDisplay, [props.inputContainer, rowClass].join(' ')
+                props.headerElements[key](props.tableID, key, header, headerDisplay, headerContainer)
             )
         }
          else {
             return (
                 <div className={`${headerContainer}`}>
-                    <div className={`${header}`}>
-                        {key}
+                    <div className={`${headerDisplay}`}>
+                        <div className={`${header}`}>
+                            {key}
+                        </div>
                     </div>      
                 </div>
             )
@@ -63,7 +67,8 @@ export default function GridTable(props) {
                             //         {key}
                             //     </div>
                             // </div>
-                            handleHeader(key, props.headerContainer, props.header)
+                            //key, headerContainer, headerDisplay, header
+                            handleHeader(key, props.headerContainer, props.headerDisplay, props.header)
                         )
                         props.data[key].map((val, i) => {
                             cells.push(handleElement(key, i, val))
@@ -77,7 +82,7 @@ export default function GridTable(props) {
                             //         {key}
                             //     </div>
                             // </div>
-                            handleHeader(key, props.headerContainer, props.header)
+                            handleHeader(key, props.headerContainer, props.headerDisplay, props.header)
                         )
                     })
                     props.data[Object.keys(props.data)[0]].map((_, i) => {
@@ -98,7 +103,7 @@ export default function GridTable(props) {
                             //         {key}
                             //     </div>
                             // </div>
-                            handleHeader(key, props.headerContainer, props.header)
+                            handleHeader(key, props.headerContainer, props.headerDisplay, props.header)
                         )
                     })
                     Object.keys(props.data).map(row => {
@@ -118,7 +123,7 @@ export default function GridTable(props) {
                             //     </div>
                                 
                             // </div>
-                            handleHeader(key, props.headerContainer, props.header)
+                            handleHeader(key, props.headerContainer, props.headerDisplay, props.header)
                             
                         )
                         
