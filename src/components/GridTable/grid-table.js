@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types'
 
 export default function GridTable(props) {
-
+ 
     //props to add
     //headerRow
     //headerElement
