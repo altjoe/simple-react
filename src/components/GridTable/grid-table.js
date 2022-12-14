@@ -62,12 +62,6 @@ export default function GridTable(props) {
                 if (props.direction === 'row') {
                     Object.keys(props.data).map(key => {
                         cells.push(
-                            // <div className={`${props.headerContainer}`}>
-                            //     <div className={`${props.header}`}>
-                            //         {key}
-                            //     </div>
-                            // </div>
-                            //key, headerContainer, headerDisplay, header
                             handleHeader(key, props.headerContainer, props.headerDisplay, props.header)
                         )
                         props.data[key].map((val, i) => {
@@ -77,14 +71,10 @@ export default function GridTable(props) {
                 } else {
                     Object.keys(props.data).map(key => {
                         cells.push(
-                            // <div className={`${props.headerContainer}`}>
-                            //     <div className={`${props.header}`}>
-                            //         {key}
-                            //     </div>
-                            // </div>
                             handleHeader(key, props.headerContainer, props.headerDisplay, props.header)
                         )
                     })
+                    
                     props.data[Object.keys(props.data)[0]].map((_, i) => {
                         Object.keys(props.data).map(key => {
                             cells.push(handleElement(key, i, props.data[key][i]))
@@ -96,41 +86,47 @@ export default function GridTable(props) {
             } else {
                 if (props.direction === 'column') {
                     let cells = []
-                    Object.keys(props.data[0]).map(key => {
-                        cells.push(
-                            // <div className={`${props.headerContainer}`}>
-                            //     <div className={`${props.header}`}>
-                            //         {key}
-                            //     </div>
-                            // </div>
-                            handleHeader(key, props.headerContainer, props.headerDisplay, props.header)
-                        )
-                    })
-                    Object.keys(props.data).map(row => {
-                        Object.keys(props.data[row]).map(key => {
-                            cells.push(handleElement(key, row, props.data[row][key]))
+                    if (props.data.length > 0) {
+                        Object.keys(props.data[0]).map(key => {
+                            cells.push(
+                                handleHeader(key, props.headerContainer, props.headerDisplay, props.header)
+                            )
                         })
-                    })
+                        Object.keys(props.data).map(row => {
+                            Object.keys(props.data[row]).map(key => {
+                                cells.push(handleElement(key, row, props.data[row][key]))
+                            })
+                        })
+                    } else {
+                        props.defaultColumns.map(key => {
+                            cells.push(
+                                handleHeader(key, props.headerContainer, props.headerDisplay, props.header)
+                            )
+                        })
+                    }
+                    
 
                     return cells
                 } else {
                     let cells = []   
-                    Object.keys(props.data[0]).map((key, i) => {
-                        cells.push(
-                            // <div className={`${props.headerContainer}`}>
-                            //     <div className={`${props.header}`}>
-                            //         {key}
-                            //     </div>
-                                
-                            // </div>
-                            handleHeader(key, props.headerContainer, props.headerDisplay, props.header)
+                    if (props.data.length > 0) {
+                        Object.keys(props.data[0]).map((key, i) => {
+                            cells.push(
+                                handleHeader(key, props.headerContainer, props.headerDisplay, props.header)
+                            )
                             
-                        )
-                        
-                        Object.keys(props.data).map(row => {
-                            cells.push(handleElement(key, row, props.data[row][key]))
+                            Object.keys(props.data).map(row => {
+                                cells.push(handleElement(key, row, props.data[row][key]))
+                            })
                         })
-                    })
+                    } else {
+                        props.defaultColumns.map(key => {
+                            cells.push(
+                                handleHeader(key, props.headerContainer, props.headerDisplay, props.header)
+                            )
+                        })
+                    }
+                    
                     return cells
                 }
             }

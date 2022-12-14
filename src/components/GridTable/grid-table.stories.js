@@ -16,14 +16,7 @@ export default {
 
 const Template = (args) => {
   const [items, setItems] = useState([
-    {'Item' : 'test', 'Garment Color' : '', 'Mono, Initials, Design' : '', 'Font Used' : '', 'Thread/Ink Color' : '', 'Quantity' : '', 'Notes' : '', 'Price/Ea' : '', 'SubTotal' : '56'},
-    {'Item' : '', 'Garment Color' : '', 'Mono, Initials, Design' : '', 'Font Used' : '', 'Thread/Ink Color' : '', 'Quantity' : '', 'Notes' : '', 'Price/Ea' : '', 'SubTotal' : ''},
-    {'Item' : '', 'Garment Color' : '', 'Mono, Initials, Design' : '', 'Font Used' : '', 'Thread/Ink Color' : '', 'Quantity' : '', 'Notes' : '', 'Price/Ea' : '', 'SubTotal' : ''},
-    {'Item' : '', 'Garment Color' : '', 'Mono, Initials, Design' : '', 'Font Used' : '', 'Thread/Ink Color' : '', 'Quantity' : '', 'Notes' : '', 'Price/Ea' : '', 'SubTotal' : ''},
-    {'Item' : '', 'Garment Color' : '', 'Mono, Initials, Design' : '', 'Font Used' : '', 'Thread/Ink Color' : '', 'Quantity' : '', 'Notes' : '', 'Price/Ea' : '', 'SubTotal' : ''},
-    {'Item' : '', 'Garment Color' : '', 'Mono, Initials, Design' : '', 'Font Used' : '', 'Thread/Ink Color' : '', 'Quantity' : '', 'Notes' : '', 'Price/Ea' : '', 'SubTotal' : ''},
-    {'Item' : '', 'Garment Color' : '', 'Mono, Initials, Design' : '', 'Font Used' : '', 'Thread/Ink Color' : '', 'Quantity' : '', 'Notes' : '', 'Price/Ea' : '', 'SubTotal' : ''}
-  ]); 
+]); 
   const handleItems = (key, index, event) => {
     // console.log(event.target.value);
     let temp = [...items]
@@ -77,7 +70,8 @@ Test.args = {
   inputDisplay : tw('flex flex-1 bg-transparent rounded-xl border-slate-500 hover:bg-slate-300'),
   input : tw('p-2 resize-none bg-transparent text-center flex-1 self-center outline-none '),
   colWidths : [1, 1, 1.5, 1, 1, 1, 2, 1, 1],
-  direction : 'column',
+  defaultColumns : ['Item', 'Garment Color', 'Mono, Initials, Design', 'Font Used', 'Thread/Ink Color', 'Quantity', 'Notes', 'Price/Ea', 'Subtotal'],
+  direction : 'row',
     elementParentFunction : {
       'Item' : (tableid, key, index) => {
           return document.getElementById(`${tableid}-${key}-${index}`).focus()
