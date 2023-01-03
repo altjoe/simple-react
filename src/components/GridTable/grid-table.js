@@ -17,9 +17,9 @@ export default function GridTable(props) {
         }
          else {
             return (
-                <div className={`${headerContainer}`}>
-                    <div className={`${headerDisplay}`}>
-                        <div className={`${header}`}>
+                <div key={`header-container-${props.tableID}-${key}`} className={`${headerContainer}`}>
+                    <div key={`header-display-${props.tableID}-${key}`} className={`${headerDisplay}`}>
+                        <div key={`header-${props.tableID}-${key}`} className={`${header}`}>
                             {key}
                         </div>
                     </div>      
@@ -46,7 +46,7 @@ export default function GridTable(props) {
             return (
                 <div key={`input-container-${props.tableID}-${key}-${index}`} className={`${props.inputContainer} ${rowClass}`}>
                     <div  key={`input-display-${props.tableID}-${key}-${index}`} className={`${props.inputDisplay}`}> 
-                        <div key={`input`} className={`${props.input}`}>
+                        <div key={`input-${props.tableID}-${key}-${index}`} className={`${props.input}`}>
                             {val}
                         </div>
                     </div>
@@ -135,7 +135,7 @@ export default function GridTable(props) {
         else {
             console.log(typeof props.data);
 
-            return <p>No props passed - data is required</p>
+            return <p key={`error-display-${props.tableID}`}>No props passed - data is required</p>
         }
     }
 
